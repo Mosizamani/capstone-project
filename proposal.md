@@ -10,6 +10,16 @@ The platform includes a variety of features designed to enhance transparency and
 
 Gamification, real-time analytics, and a feedback-driven development loop further empower users to engage effectively and stay connected. With a built-in payment system that supports milestone-based payments, escrow, and invoicing, the app prioritizes fair, secure transactions. By integrating project management tools, document sharing, and timeline tracking, it ensures clear expectations and smooth project delivery. 
 
+Technologies 
+
+Technologies that I want to use are as below: 
+
+Front-end: React, Vite 
+
+Backend1: Node.Js, Express and Mongodb for database 
+
+Backend2: Flask, python 
+
 From contractors seeking reliable work to clients in need of specific expertise, this app creates a robust, dynamic, and supportive ecosystem that enhances the process of connecting, collaborating, and completing projects successfully. Here is a detailed list of features that make this app a complete solution for the contracting industry. 
 
 1. User Registration and Profiles 
