@@ -126,6 +126,36 @@ Quotation Submission Post Visit: After the visit, contractors can submit their q
 
 Furthermore, contractors who provide a quotation following an on-site visit will be given priority in submitting a bid, increasing their likelihood of securing the project. This priority helps reward contractors who make an effort to fully understand the project requirements and deliver a precise quote, benefiting both clients and contractors with a transparent, well-informed bidding process. 
 
- 
+Phases of feature Implementation 
 
- 
+Phase Zero: 
+
+1- User registration and profiles 
+
+2- project queue and posting 
+
+3- Search and filtering option 
+
+4- Customer support and resources 
+
+5- On-site visit and quotation request 
+
+Phase One: 
+
+6- Messaging and communication tools 
+
+7- Notification and alert system 
+
+8- Feedback loop for development 
+
+Phase Two:  
+
+9- Membership tiers and benefits 
+
+10- project management tools 
+
+11- payment system  
+
+12- Analytics and Insights 
+
+13- Gamification features
