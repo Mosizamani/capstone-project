@@ -1,6 +1,6 @@
 /* Base navbar styling */
 .navbar {
-    background-color: #ffe600;
+    background-color: #ffd700;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -35,7 +35,7 @@
 }
 
 .nav-links a {
-    color: rgb(0, 0, 0);
+    color: #6A0DAD;
     text-decoration: none;
     padding: 10px 15px;
     font-size: 18px;
@@ -44,8 +44,8 @@
 }
 
 .nav-links a:hover {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #6A0DAD;
+    color: #ffd700;
     border-radius: 5px;
 }
 
