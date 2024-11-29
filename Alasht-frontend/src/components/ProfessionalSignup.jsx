@@ -25,33 +25,58 @@ const updateSkillOptions = () => {
 };
 
 const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Form Submitted!");
-};
+    event.preventDefault()
+
+    const formData = new FormData(event.target)
+    const data = Object.fromEntries(formData.entries())
+
+
+    console.log("Submit function triggered!")
+    console.log("Skills:", skills)
+    console.log("Submitted data:", data)
+    alert("Form Submitted!")
+
+    // try {
+    //     const response = await fetch("https://example.com/api/submit", {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(data),
+    //     });
+
+    //     if (response.ok) {
+    //         alert("Form submitted successfully!");
+    //     } else {
+    //         alert("Failed to submit form.");
+    //     }
+    // } catch (error) {
+    //     console.error("Submission error:", error);
+    //     alert("An error occurred during submission.");
+    // }
+}
 
 return (
     <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="username">Username: </label>
         <input type="text" id="username" name="username" required minLength={4} />
         <br />
         <br />
 
-        <label htmlFor="firstname">First Name:</label>
+        <label htmlFor="firstname">First Name: </label>
         <input type="text" id="firstname" name="firstname" required />
         <br />
         <br />
 
-        <label htmlFor="lastname">Last Name:</label>
+        <label htmlFor="lastname">Last Name: </label>
         <input type="text" id="lastname" name="lastname" required />
         <br />
         <br />
 
-        <label htmlFor="company">Company:</label>
+        <label htmlFor="company">Company: </label>
         <input type="text" id="company" name="company" required />
         <br />
         <br />
 
-        <label htmlFor="skills">Skills:</label>
+        <label htmlFor="skills">Skills: </label>
         <div id="skills-container">
             {skills.map((skill, index) => (
             <SkillInput
@@ -70,23 +95,23 @@ return (
         </div>
         <br />
 
-        <label htmlFor="payment">Payment:</label>
+        <label htmlFor="payment">Payment: </label>
         <input type="text" id="payment" name="payment" defaultValue="By contract" required />
         <br />
         <br />
 
         {/* Remaining fields */}
-        <label htmlFor="phone">Phone Number:</label>
+        <label htmlFor="phone">Phone Number: </label>
         <input type="tel" id="phone" name="phone" required />
         <br />
         <br />
 
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">Email: </label>
         <input type="email" id="email" name="email" required />
         <br />
         <br />
 
-        <label htmlFor="country">Country (default: USA):</label>
+        <label htmlFor="country">Country: </label>
         <select id="country" name="country" required defaultValue="USA">
             <option value="USA">USA</option>
             <option value="Canada">Canada</option>
@@ -95,7 +120,7 @@ return (
         <br />
         <br />
 
-        <button type="submit" onClick={handleSubmit}>Submit</button>
+        <button type="submit">Submit</button>
     </form>
 )
 }
