@@ -22,6 +22,7 @@ return (
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
             <Link to="/">Alasht®</Link>
             <Link to="/services">Services</Link>
+            <Link to="/dashboard">Dashboard</Link>
             <Link to="/professionalsignup">Join as a Pro</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Signup</Link>

@@ -7,6 +7,7 @@ import Login from './components/Login'
 import Signup from './components/SignUp'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'
+import Dashboard from './components/Dashboard'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} ></Route>
         <Route path="/signup" element={<Signup />} ></Route>
         <Route path="*" element={<NotFound />} ></Route>
+        <Route path="dashboard" element={<Dashboard />} ></Route>
       </Routes>
     </>
   )
