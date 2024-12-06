@@ -14,16 +14,10 @@ const port = process.env.PORT || 4001
 
 app.use(express.json())
 app.use(express.static('front-end'))
-app.use(cors())
-
-const path = require('path')
-//... Serve the static files from the React app
-app.use(express.static(path.join(__dirname, '../Alasht-frontend'))) 
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../Alasht-frontend', 'index.html'))
-})
-
+app.use(cors({
+    origin: process.env.FRONT_END_URL,
+    Credentials: true
+}))
 
 // app.get('/pro-signup', async (req, res) => {
 //     try {
@@ -49,7 +43,7 @@ app.get('/', (req, res) => {
 const start = async () => {
     try {
         //... Connect to the MongoDB database
-        await mongoose.connect('mongodb://localhost:27017/contractor')
+        await mongoose.connect(process.env.DATA_BASE_URL)
 
         //... Start the Express server on the specified port
         app.listen(port, () => {
