@@ -91,6 +91,59 @@ const ContractorSchema = new mongoose.Schema({
     }
 }, {versionKey: false})
 
+const ProjectSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    description: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    startDate: {
+        type: Date,
+        required: true
+    },
+    endDate: {
+        type: Date,
+        required: false
+    },
+    budget: {
+        type: Number,
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ['Pending', 'Ongoing', 'Completed', 'Cancelled'],
+        default: 'Pending',
+        required: true
+    },
+    contractor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Contractor',
+        required: true
+    },
+    location: {
+        type: String,
+        required: false,
+        trim: true
+    },
+    Zip: {
+        type: String,
+        required: false,
+        trim: true
+    },
+    createdDate: { 
+        type: Date,
+        required: true,
+        default: Date.now
+    }
+}, {versionKey: false})
+
+const Project = mongoose.model('Project', ProjectSchema)
+
 const Contractor = mongoose.model('Contractor', ContractorSchema);
 
-module.exports = { Contractor }
+module.exports = { Contractor, Project }

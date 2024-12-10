@@ -1,28 +1,28 @@
-import React from "react";
-import "./Dashboard.css"; // Ensure to style the dashboard for a polished look
+import React from "react"
+import "./Dashboard.css" // Ensure to style the dashboard for a polished look
 
 export default function Dashboard() {
 const user = {
     name: "John Doe",
     email: "john.doe@example.com",
     role: "Project Manager",
-};
+}
 
 const projects = [
     { id: 1, name: "Project Alpha", status: "In Progress" },
     { id: 2, name: "Project Beta", status: "Completed" },
     { id: 3, name: "Project Gamma", status: "Not Started" },
-];
+]
 
-const [filteredProjects, setFilteredProjects] = React.useState(projects);
+const [filteredProjects, setFilteredProjects] = React.useState(projects)
 
 const handleFilter = (status) => {
     if (status === "All") {
-    setFilteredProjects(projects);
+    setFilteredProjects(projects)
     } else {
-    setFilteredProjects(projects.filter((project) => project.status === status));
+    setFilteredProjects(projects.filter((project) => project.status === status))
     }
-};
+}
 
 return (
     <div className="dashboard-container">
@@ -60,5 +60,5 @@ return (
         </div>
     </main>
     </div>
-);
+)
 }
