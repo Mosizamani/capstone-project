@@ -130,6 +130,22 @@ const ProjectSchema = new mongoose.Schema({
         required: false,
         trim: true
     },
+    country: {
+        type: String, 
+        default: 'USA',
+        required: true,
+        trim: true,
+    },
+    state: {
+        type: String,
+        required: true,
+        trim: true,
+        },
+    city: {
+        type: String,
+        required: true,
+        trim: true,
+        },
     Zip: {
         type: String,
         required: false,
