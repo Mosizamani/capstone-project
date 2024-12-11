@@ -97,6 +97,10 @@ const ProjectSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    service: {
+        type: Array,
+        required: true,
+        },
     description: {
         type: String,
         required: true,

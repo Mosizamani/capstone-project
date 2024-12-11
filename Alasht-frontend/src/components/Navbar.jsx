@@ -26,6 +26,7 @@ return (
             <Link to="/professionalsignup">Join as a Pro</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Signup</Link>
+            <Link to="/projects/new">Post a Project</Link>
         </div>
     </nav>
 )

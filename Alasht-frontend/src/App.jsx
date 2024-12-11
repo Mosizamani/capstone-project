@@ -8,6 +8,7 @@ import Signup from './components/SignUp'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
+import ProjectForm from './components/ProjectForm'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/signup" element={<Signup />} ></Route>
         <Route path="*" element={<NotFound />} ></Route>
         <Route path="dashboard" element={<Dashboard />} ></Route>
+        <Route path="/projects/new" element={<ProjectForm />} />
       </Routes>
     </>
   )

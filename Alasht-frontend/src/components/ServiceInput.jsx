@@ -1,15 +1,15 @@
 import React from "react";
 
-const SkillInput = ({
-skill,
+const ServiceInput = ({
+service,
 index,
-onSkillChange,
-onRemoveSkill,
-addSkillInput,
-selectedSkills,
+onServiceChange,
+onRemoveService,
+addServiceInput,
+selectedServices,
 }) => {
-const skillOptions = [
-    "NeedSkill",
+const serviceOptions = [
+    "NeedService",
     "Carpentry",
     "Drywall",
     "Flooring",
@@ -28,42 +28,42 @@ const skillOptions = [
     "Roofing",
     "HVAC",
     "Other",
-]
+];
 
-const handleSkillSelect = (event) => {
+const handleServiceSelect = (event) => {
     const { value } = event.target;
-    onSkillChange(skill.id, value);
+    onServiceChange(service.id, value);
 };
 
 return (
-    <div className="skill-input">
+    <div className="service-input">
     <select
-        name="skills[]"
-        value={skill.value}
-        onChange={handleSkillSelect}
+        name="services[]"
+        value={service.value}
+        onChange={handleServiceSelect}
         required
     >
         <option value="" disabled>
-        Select a skill
+        Select a service
         </option>
-        {skillOptions.map((option) => (
+        {serviceOptions.map((option) => (
         <option
             key={option}
             value={option}
             disabled={
-            selectedSkills.has(option.toLowerCase()) &&
-            option.toLowerCase() !== skill.value.toLowerCase()
+            selectedServices.has(option.toLowerCase()) &&
+            option.toLowerCase() !== service.value.toLowerCase()
             }
         >
             {option}
         </option>
         ))}
     </select>
-    <button type="button" onClick={addSkillInput} disabled={!skill.value}>
+    <button type="button" onClick={addServiceInput} disabled={!service.value}>
         +
     </button>
     {index > 0 && (
-        <button type="button" onClick={() => onRemoveSkill(skill.id)}>
+        <button type="button" onClick={() => onRemoveService(service.id)}>
         -
         </button>
     )}
@@ -71,4 +71,4 @@ return (
 );
 };
 
-export default SkillInput
+export default ServiceInput;
