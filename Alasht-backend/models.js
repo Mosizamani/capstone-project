@@ -120,8 +120,8 @@ const ProjectSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['Pending', 'Ongoing', 'Completed', 'Cancelled'],
-        default: 'Pending',
+        enum: ['Under Review', 'Pending', 'Ongoing', 'Completed', 'Cancelled'],
+        default: 'Under Review',
         required: true
     },
     contractor: {
