@@ -5,18 +5,16 @@ const cors = require('cors')
 const session = require('express-session')
 const passport = require('passport')
 
-const proRouter = require('./routers/proRouter')
-const clientRouter = require('./routers/clientRouter')
-const authRouter = require('./routers/authRouter')
-
 require('dotenv').config()
-
-const { Contractor } = require('./models')
 
 const app = express()
 const port = process.env.PORT || 4001
 const sessionSecret = process.env.SESSION_SECRET
 const mongodbUrl = process.env.DATA_BASE_URL
+
+const proRouter = require('./routers/proRouter')
+const clientRouter = require('./routers/clientRouter')
+const authRouter = require('./routers/authRouter')
 
 app.use(express.json())
 app.use(express.static('front-end'))
@@ -43,7 +41,6 @@ app.use(proRouter)
 app.use(clientRouter)
 
 app.use(authRouter)
-
 
 //... Function to start the application
 const start = async () => {

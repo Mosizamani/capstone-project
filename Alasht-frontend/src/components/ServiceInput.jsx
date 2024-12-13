@@ -28,12 +28,12 @@ const serviceOptions = [
     "Roofing",
     "HVAC",
     "Other",
-];
+]
 
 const handleServiceSelect = (event) => {
     const { value } = event.target;
     onServiceChange(service.id, value);
-};
+}
 
 return (
     <div className="service-input">
@@ -68,7 +68,7 @@ return (
         </button>
     )}
     </div>
-);
-};
+)
+}
 
-export default ServiceInput;
+export default ServiceInput

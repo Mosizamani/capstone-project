@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import ServiceInput from './ServiceInput'
 
 const ProjectForm = ({ onSubmit }) => {
 const [formData, setFormData] = useState({
@@ -18,17 +19,42 @@ const [formData, setFormData] = useState({
     zip: '',
 })
 
+const [services, setServices] = useState([{ id: Date.now(), value: "" }]);
+const [message, setMessage] = useState("")
+
+const addServiceInput = () => {
+    setServices([...services, { id: Date.now(), value: "" }]);
+};
+
+const removeServiceInput = (id) => {
+    setServices(services.filter((service) => service.id !== id));
+};
+
+const handleServiceChange = (id, value) => {
+    setMessage(value === "NeedService" ? "No worries, we will teach you the essential services!" : "");
+    setServices(services.map((service) => (service.id === id ? { ...service, value } : service)));
+}
+
+const updateServiceOptions = () => {
+    const selectedServices = new Set(services.map((service) => service.value.toLowerCase()).filter((val) => val));
+    return selectedServices
+}
+
 const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
 }
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    onSubmit(formData)
+    onSubmit({ ...formData, services })
+
     alert("Form Submitted!")
+
     console.log(formData)
 }
+
+
 
 return (
     <form onSubmit={handleSubmit}>
@@ -44,13 +70,21 @@ return (
     </div>
     <div>
         <label>Select a service required:</label>
-        <input
-        type="text"
-        name="service"
-        value={formData.service}
-        onChange={handleChange}
-        required
-        />
+
+        {services.map((service, index) => (
+            <ServiceInput
+                key={service.id}
+                service={service}
+                index={index}
+                onServiceChange={handleServiceChange}
+                onRemoveService={removeServiceInput}
+                addServiceInput={addServiceInput}
+                selectedServices={updateServiceOptions()}
+            />
+            ))}
+        <div id="message-container" style={{ color: "green", marginTop: "10px" }}>
+            {message}
+        </div>    
     </div>
     <div>
         <label>Description:</label>

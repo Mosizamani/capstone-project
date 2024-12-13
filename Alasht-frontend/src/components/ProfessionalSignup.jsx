@@ -4,7 +4,7 @@ import SkillInput from "./SkillInput"
 
 export default function ProfessionalSignup () {
 const [skills, setSkills] = useState([{ id: Date.now(), value: "" }]);
-const [message, setMessage] = useState("");
+const [message, setMessage] = useState("")
 
 const addSkillInput = () => {
     setSkills([...skills, { id: Date.now(), value: "" }]);
@@ -21,8 +21,8 @@ const handleSkillChange = (id, value) => {
 
 const updateSkillOptions = () => {
     const selectedSkills = new Set(skills.map((skill) => skill.value.toLowerCase()).filter((val) => val));
-    return selectedSkills;
-};
+    return selectedSkills
+}
 
 const handleSubmit = async (event) => {
     event.preventDefault()
@@ -64,22 +64,38 @@ async function fetchPro(data) {
 return (
     <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username: </label>
-        <input type="text" id="username" name="username" required minLength={4} />
+        <input 
+        type="text" 
+        id="username" 
+        name="username" 
+        required minLength={4} />
         <br />
         <br />
 
         <label htmlFor="firstname">First Name: </label>
-        <input type="text" id="firstname" name="firstname" required />
+        <input 
+        type="text" 
+        id="firstname" 
+        name="firstname" 
+        required />
         <br />
         <br />
 
         <label htmlFor="lastname">Last Name: </label>
-        <input type="text" id="lastname" name="lastname" required />
+        <input 
+        type="text" 
+        id="lastname" 
+        name="lastname" 
+        required />
         <br />
         <br />
 
         <label htmlFor="company">Company: </label>
-        <input type="text" id="company" name="company" required />
+        <input 
+        type="text" 
+        id="company" 
+        name="company" 
+        required />
         <br />
         <br />
 
@@ -128,6 +144,11 @@ return (
             <option value="Canada">Canada</option>
             <option value="Mexico">Mexico</option>
         </select>
+        <br />
+        <br />
+
+        <label htmlFor="zipcode">Zipcode: </label>
+        <input type="zipcode" id="zipcode" name="zipcode" required />
         <br />
         <br />
 
