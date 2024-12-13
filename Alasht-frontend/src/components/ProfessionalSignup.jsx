@@ -43,8 +43,8 @@ const handleSubmit = async (event) => {
 
 async function fetchPro(data) {
     try {
-        const response = await fetch("http://localhost:4001", {
-            method: "POST",
+        const response = await fetch("http://localhost:4001/contractors", {
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
             withCredentials: true
@@ -135,5 +135,3 @@ return (
     </form>
 )
 }
-
-

@@ -20,3 +20,5 @@ router.put('/projects', async (req, res) => {})
 router.patch('/projects/:id', async (req, res) => {})
 
 router.delete('/projects/:id', async (req, res) => {})
+
+module.exports = router

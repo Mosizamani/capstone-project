@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/contractors', async (req, res) => {
     const contractors = await Contractor.find({
-        user: req.user._id
+        user: '12345'
     })
     return res.status(200).json(contractors)
 })
@@ -15,7 +15,10 @@ router.get('/user-info', async (req, res) => {})
 
 router.get('/contractors/:id', async (req, res) => {})
 
-router.put('/contractors', async (req, res) => {})
+router.put('/contractors', async (req, res) => {
+    console.log(req.body)
+    console.log("Contractor data received!")
+})
 
 router.patch('/contractors/:id', async (req, res) => {})
 

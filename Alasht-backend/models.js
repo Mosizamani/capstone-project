@@ -162,8 +162,34 @@ const ProjectSchema = new mongoose.Schema({
     }
 }, {versionKey: false})
 
+const UserSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        unique: true,
+        requires: true
+    },
+    passwordSalt: {
+        type: String,
+        required: true
+    },
+    passwordHash: {
+        type: String,
+        required: true
+    }, 
+    createdDate: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    lastLoginDate: {
+        type: Date
+    }
+})
+
 const Project = mongoose.model('Project', ProjectSchema)
 
-const Contractor = mongoose.model('Contractor', ContractorSchema);
+const Contractor = mongoose.model('Contractor', ContractorSchema)
 
-module.exports = { Contractor, Project }
+const User = mongoose.model('User', UserSchema)
+
+module.exports = { Contractor, Project, User }
