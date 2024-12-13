@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types';
 
 const ProjectForm = ({ onSubmit }) => {
 const [formData, setFormData] = useState({
@@ -8,24 +9,26 @@ const [formData, setFormData] = useState({
     startDate: '',
     endDate: '',
     budget: '',
-    status: 'Pending',
+    status: 'Under Review',
     contractor: '',
     location: '',
     country: 'USA',
     state: '',
     city: '',
     zip: '',
-});
+})
 
 const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-};
+    setFormData({ ...formData, [name]: value })
+}
 
 const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-};
+    e.preventDefault()
+    onSubmit(formData)
+    alert("Form Submitted!")
+    console.log(formData)
+}
 
 return (
     <form onSubmit={handleSubmit}>
@@ -95,6 +98,7 @@ return (
         onChange={handleChange}
         required
         >
+        <option value="Under Review">Under Review</option>
         <option value="Pending">Pending</option>
         <option value="Ongoing">Ongoing</option>
         <option value="Completed">Completed</option>
@@ -110,6 +114,7 @@ return (
         onChange={handleChange}
         required
         />
+        <p>If you have the contractors ID please write it down.</p>
     </div>
     <div>
         <label>Location:</label>
@@ -161,7 +166,7 @@ return (
     </div>
     <button type="submit">Submit Project</button>
     </form>
-);
-};
+)
+}
 
 export default ProjectForm

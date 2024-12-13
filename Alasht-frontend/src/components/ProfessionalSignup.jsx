@@ -24,34 +24,41 @@ const updateSkillOptions = () => {
     return selectedSkills;
 };
 
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
     event.preventDefault()
 
     const formData = new FormData(event.target)
     const data = Object.fromEntries(formData.entries())
 
+    data.skills = skills.map(skill => skill.value).filter(value => value.trim() !== "")
 
     console.log("Submit function triggered!")
     console.log("Skills:", skills)
     console.log("Submitted data:", data)
+
     alert("Form Submitted!")
 
-    // try {
-    //     const response = await fetch("https://example.com/api/submit", {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify(data),
-    //     });
+    await fetchPro(data)
+}
 
-    //     if (response.ok) {
-    //         alert("Form submitted successfully!");
-    //     } else {
-    //         alert("Failed to submit form.");
-    //     }
-    // } catch (error) {
-    //     console.error("Submission error:", error);
-    //     alert("An error occurred during submission.");
-    // }
+async function fetchPro(data) {
+    try {
+        const response = await fetch("http://localhost:4001", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+            withCredentials: true
+        })
+
+        if (response.ok) {
+            alert("Form submitted successfully!");
+        } else {
+            alert("Failed to submit form.");
+        }
+    } catch (error) {
+        console.error("Submission error:", error);
+        alert("An error occurred during submission.");
+    }
 }
 
 return (
@@ -102,7 +109,11 @@ return (
 
         {/* Remaining fields */}
         <label htmlFor="phone">Phone Number: </label>
-        <input type="tel" id="phone" name="phone" required />
+        <input 
+        type="tel" 
+        id="phone" 
+        name="phone" 
+        required />
         <br />
         <br />
 

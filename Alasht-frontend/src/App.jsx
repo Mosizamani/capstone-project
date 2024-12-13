@@ -13,6 +13,10 @@ import ProjectForm from './components/ProjectForm'
 
 function App() {
 
+  const handleFormSubmit = (formData) => {
+    console.log("Submitted client data:",formData)
+  }
+
   return (
     <>
       <Navbar></Navbar>
@@ -24,7 +28,7 @@ function App() {
         <Route path="/signup" element={<Signup />} ></Route>
         <Route path="*" element={<NotFound />} ></Route>
         <Route path="dashboard" element={<Dashboard />} ></Route>
-        <Route path="/projects/new" element={<ProjectForm />} />
+        <Route path="/projects/new" element={<ProjectForm onSubmit={handleFormSubmit} />} />
       </Routes>
     </>
   )

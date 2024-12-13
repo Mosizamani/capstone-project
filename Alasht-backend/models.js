@@ -127,7 +127,7 @@ const ProjectSchema = new mongoose.Schema({
     contractor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Contractor',
-        required: true
+        required: false
     },
     location: {
         type: String,
