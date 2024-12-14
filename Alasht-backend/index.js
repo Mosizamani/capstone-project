@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(express.static('front-end'))
 app.use(cors({
     origin: process.env.FRONT_END_URL,
-    Credentials: true
+    credentials: true
 }))
 
 app.use(session({

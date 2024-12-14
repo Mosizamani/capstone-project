@@ -57,17 +57,17 @@ const ContractorSchema = new mongoose.Schema({
     },
     state: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     },
     city: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     },
     address:{
     type: String,
-    required: true,
+    required: false,
     trim: true,
     },
     zip: {
@@ -97,7 +97,7 @@ const ProjectSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    service: {
+    services: {
         type: Array,
         required: true,
         },
@@ -124,11 +124,12 @@ const ProjectSchema = new mongoose.Schema({
         default: 'Under Review',
         required: true
     },
-    contractor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Contractor',
-        required: false
-    },
+    // contractor: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Contractor',
+    //     default: null,
+    //     required: false
+    // },
     location: {
         type: String,
         required: false,
@@ -150,9 +151,9 @@ const ProjectSchema = new mongoose.Schema({
         required: true,
         trim: true,
         },
-    Zip: {
+    zip: {
         type: String,
-        required: false,
+        required: true,
         trim: true
     },
     createdDate: { 

@@ -38,10 +38,10 @@ const handleSubmit = async (event) => {
 
     alert("Form Submitted!")
 
-    await fetchPro(data)
+    await fetchProfessional(data)
 }
 
-async function fetchPro(data) {
+async function fetchProfessional(data) {
     try {
         const response = await fetch("http://localhost:4001/contractors", {
             method: "PUT",
@@ -147,8 +147,17 @@ return (
         <br />
         <br />
 
-        <label htmlFor="zipcode">Zipcode: </label>
-        <input type="zipcode" id="zipcode" name="zipcode" required />
+        <label htmlFor="zip">Zip code: </label>
+        <input 
+        type="zip" 
+        id="zip" 
+        name="zip"
+        required
+        minLength={5}
+        maxLength={5}
+        pattern="\d{5}" // Optional, to ensure it's numeric
+        title="Please enter exactly 5 digits."
+        />
         <br />
         <br />
 

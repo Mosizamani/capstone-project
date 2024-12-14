@@ -38,7 +38,7 @@ const handleSkillSelect = (event) => {
 return (
     <div className="skill-input">
     <select
-        name="skills[]"
+        name="skills"
         value={skill.value}
         onChange={handleSkillSelect}
         required

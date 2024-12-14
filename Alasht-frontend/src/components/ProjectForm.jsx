@@ -45,16 +45,41 @@ const handleChange = (e) => {
     setFormData({ ...formData, [name]: value })
 }
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault()
-    onSubmit({ ...formData, services })
+    // onSubmit({ ...formData, services })
+
+    const formData = new FormData(e.target)
+    const data = Object.fromEntries(formData.entries())
+
+    data.services = services.map(service => service.value).filter(value => value.trim() !== "")
 
     alert("Form Submitted!")
 
-    console.log(formData)
+    console.log(data)
+
+    await fetchProject(data)
 }
 
+async function fetchProject(data) {
+    try {
+        const response = await fetch("http://localhost:4001/projects", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+            withCredentials: true
+        })
 
+        if (response.ok) {
+            alert("Form submitted successfully!");
+        } else {
+            alert("Failed to submit form.");
+        }
+    } catch (error) {
+        console.error("Submission error:", error);
+        alert("An error occurred during submission.");
+    }
+}
 
 return (
     <form onSubmit={handleSubmit}>
@@ -75,6 +100,7 @@ return (
             <ServiceInput
                 key={service.id}
                 service={service}
+                name="services"
                 index={index}
                 onServiceChange={handleServiceChange}
                 onRemoveService={removeServiceInput}
@@ -139,17 +165,16 @@ return (
         <option value="Cancelled">Cancelled</option>
         </select>
     </div>
-    <div>
+    {/* <div>
         <label>Contractor ID:</label>
         <input
         type="text"
         name="contractor"
         value={formData.contractor}
         onChange={handleChange}
-        required
         />
         <p>If you have the contractors ID please write it down.</p>
-    </div>
+    </div> */}
     <div>
         <label>Location:</label>
         <input
@@ -196,6 +221,10 @@ return (
         name="zip"
         value={formData.zip}
         onChange={handleChange}
+        minLength={5}
+        maxLength={5}
+        pattern="\d{5}" // Optional, to ensure it's numeric
+        title="Please enter exactly 5 digits."
         />
     </div>
     <button type="submit">Submit Project</button>

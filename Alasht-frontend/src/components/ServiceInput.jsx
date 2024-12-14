@@ -38,7 +38,7 @@ const handleServiceSelect = (event) => {
 return (
     <div className="service-input">
     <select
-        name="services[]"
+        name="services"
         value={service.value}
         onChange={handleServiceSelect}
         required
