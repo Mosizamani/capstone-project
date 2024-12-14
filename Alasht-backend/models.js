@@ -91,6 +91,8 @@ const ContractorSchema = new mongoose.Schema({
     }
 }, {versionKey: false})
 
+const Contractor = mongoose.model('Contractor', ContractorSchema)
+
 const ProjectSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -163,6 +165,8 @@ const ProjectSchema = new mongoose.Schema({
     }
 }, {versionKey: false})
 
+const Project = mongoose.model('Project', ProjectSchema)
+
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -184,12 +188,13 @@ const UserSchema = new mongoose.Schema({
     },
     lastLoginDate: {
         type: Date
+    },
+    userType: {
+        type: String,
+        enum: ['client', 'contractor'],
+        required: true
     }
 })
-
-const Project = mongoose.model('Project', ProjectSchema)
-
-const Contractor = mongoose.model('Contractor', ContractorSchema)
 
 const User = mongoose.model('User', UserSchema)
 
