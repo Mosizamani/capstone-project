@@ -3,13 +3,13 @@ const mongoose = require('mongoose')
 //make a schema
 
 const ContractorSchema = new mongoose.Schema({
-    username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    minlength: 4
-    }, 
+    // username: {
+    // type: String,
+    // required: true,
+    // unique: true,
+    // trim: true,
+    // minlength: 4
+    // }, 
     firstname: {
     type: String,
     required: true,

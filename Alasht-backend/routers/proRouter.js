@@ -19,9 +19,6 @@ router.put('/contractors', async (req, res) => {
 
     console.log("Received data:", req.body)
 
-    if(!req.body.username) {
-        return res.status(400).json({ message:'Username is required to create a contractor' })
-    }
     if(!req.body.firstname) {
         return res.status(400).json({ message:'First name is required to create a contractor' })
     }
@@ -50,7 +47,6 @@ router.put('/contractors', async (req, res) => {
     try {
         const contractor = await Contractor.create({
             // user: req.user._id,
-            username: req.body.username,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             company: req.body.company,

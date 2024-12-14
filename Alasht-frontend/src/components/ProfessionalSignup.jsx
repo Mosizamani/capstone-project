@@ -63,15 +63,7 @@ async function fetchProfessional(data) {
 
 return (
     <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username: </label>
-        <input 
-        type="text" 
-        id="username" 
-        name="username" 
-        required minLength={4} />
-        <br />
-        <br />
-
+        <h2>Complete your Profile</h2>
         <label htmlFor="firstname">First Name: </label>
         <input 
         type="text" 
