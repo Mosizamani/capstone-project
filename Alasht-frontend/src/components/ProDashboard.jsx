@@ -1,7 +1,7 @@
 import React from "react"
-import "./Dashboard.css" // Ensure to style the dashboard for a polished look
+import "./ProDashboard.css" // Ensure to style the dashboard for a polished look
 
-export default function Dashboard() {
+export default function ProDashboard() {
 const user = {
     name: "John Doe",
     email: "john.doe@example.com",

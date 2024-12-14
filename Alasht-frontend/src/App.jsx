@@ -7,7 +7,8 @@ import Login from './components/Login'
 import Signup from './components/SignUp'
 import NotFound from './components/NotFound'
 import Navbar from './components/Navbar'
-import Dashboard from './components/Dashboard'
+import ProDashboard from './components/ProDashboard'
+import ClientDashboard from './components/ClientDashboard'
 import ProjectForm from './components/ProjectForm'
 
 
@@ -27,7 +28,8 @@ function App() {
         <Route path="/login" element={<Login />} ></Route>
         <Route path="/signup" element={<Signup />} ></Route>
         <Route path="*" element={<NotFound />} ></Route>
-        <Route path="dashboard" element={<Dashboard />} ></Route>
+        <Route path="pro-dashboard" element={<ProDashboard />} ></Route>
+        <Route path="client-dashboard" element={<ClientDashboard />} ></Route>
         <Route path="/projects/new" element={<ProjectForm onSubmit={handleFormSubmit} />} />
       </Routes>
     </>
