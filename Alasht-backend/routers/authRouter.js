@@ -61,8 +61,8 @@ passport.deserializeUser(function(user, cb) {
 })
 
 // Registration Route
-router.post('/register', async (req, res, next) => {
-    const { username, password, userType } = req.body
+router.post('/auth/register', async (req, res, next) => {
+    const { username, password, userType, message } = req.body
 
     if (!username || !password || !userType) {
         return res.status(400).json({ error: 'Username, password, and userType are required.' });
@@ -101,10 +101,10 @@ router.post('/register', async (req, res, next) => {
 
 // Login Route
 router.post(
-    '/login',
+    '/auth/login',
     passport.authenticate('local', {
-        successRedirect: '/app',
-        failureRedirect: '/app/login.html'
+        successRedirect: '/home',
+        failureRedirect: '/home/login.html'
     })
 )
 
@@ -119,7 +119,7 @@ router.post('/logout', (req, res, next) => {
         if (error) {
             return next(error);
         }
-        res.redirect('/app/login.html');
+        res.redirect('/home/login.html');
     });
 });
 

@@ -7,6 +7,8 @@ const Login = () => {
         rememberMe: false,
     })
 
+    const [message, setMessage] = useState("")
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData((prev) => ({
@@ -15,10 +17,31 @@ const Login = () => {
         }))
     }
 
-    const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Submitted:", formData);
-        // Add API call or authentication logic here
+        try {
+            const response = await fetch("http://localhost:4001/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: formData.username,
+                    password: formData.password,
+                }),
+            });
+
+            const result = await response.json()
+            
+            if (response.ok) {
+                setMessage("Login successful!");
+                // Optionally redirect or store user info
+                console.log("User info:", result.user);
+            } else {
+                setMessage(result.error || "Login failed.");
+            }
+        } catch (error) {
+            setMessage("An error occurred. Please try again.");
+            console.error("Error:", error);
+        }
     }
 
     return (
@@ -76,6 +99,7 @@ const Login = () => {
                 <div style={{ textAlign: "center", marginTop: "10px" }}>
                     <a href="/forgot-password" style={{ color: "#6A0DAD", textDecoration: "none" }}>Forgot Password?</a>
                 </div>
+                {message && <p style={{ color: "red", textAlign: "center", marginTop: "10px" }}>{message}</p>}
             </form>
         </div>
     );

@@ -4,31 +4,36 @@ const Signup = () => {
     const [userType, setUserType] = useState("client") // Default to client
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [message, setMessage] = useState("")
+    const [messageColor, setMessageColor] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await signupUser(username, password, userType)
+        await signupUser(username, password, userType, message)
     }
 
     const signupUser = async (username, password, userType) => {
         try {
-            const response = await fetch('/auth/register', {
+            const response = await fetch("http://localhost:4001/auth/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password, userType }),
-            });
+                body: JSON.stringify({ username, password, userType, message }),
+            })
     
             if (response.ok) {
                 const data = await response.json();
-                console.log('User registered successfully:', data);
+                setMessage("User registered successfully!");
+                setMessageColor("green"); // Success message in green
             } else {
                 const errorData = await response.json();
-                console.error('Error registering user:', errorData);
+                setMessage(errorData.error || "Error registering user.");
+                setMessageColor("red"); // Error message in red
             }
         } catch (error) {
-            console.error('Network error:', error);
+            setMessage("Network error. Please try again later.");
+            setMessageColor("red");
         }
     }
 
@@ -58,6 +63,9 @@ const Signup = () => {
                     required />
                 </div>
                 <br />
+                {message && (
+                <p style={{ color: messageColor }}>{message}</p>
+                )}
                 <button type="submit">Sign Up</button>
             </form>
         </div>
