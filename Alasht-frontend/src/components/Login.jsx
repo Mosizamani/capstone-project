@@ -4,6 +4,7 @@ const Login = () => {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
+        userType: "",
         rememberMe: false,
     })
 
@@ -18,23 +19,30 @@ const Login = () => {
     }
 
 const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
-            const response = await fetch("http://localhost:4001/auth/login", {
+            const response = await fetch("http://localhost:4001/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     username: formData.username,
                     password: formData.password,
+                    userType: formData.userType,
                 }),
-            });
+            })
 
             const result = await response.json()
-            
-            if (response.ok) {
-                setMessage("Login successful!");
+
+            if (response.ok && formData.userType === "contractor") {
+                setMessage("Contractor login successful!");
                 // Optionally redirect or store user info
-                console.log("User info:", result.user);
+                console.log("User info:", result.user)
+                window.location.href = "/pro-dashboard"
+            } else if (response.ok && formData.userType === "client") {
+                setMessage("Client login successful!");
+                // Optionally redirect or store user info
+                console.log("User info:", result.user)
+                window.location.href = "/client-dashboard"
             } else {
                 setMessage(result.error || "Login failed.");
             }
@@ -102,7 +110,7 @@ const handleSubmit = async (e) => {
                 {message && <p style={{ color: "red", textAlign: "center", marginTop: "10px" }}>{message}</p>}
             </form>
         </div>
-    );
-};
+    )
+}
 
 export default Login

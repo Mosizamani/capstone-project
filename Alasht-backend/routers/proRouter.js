@@ -13,6 +13,10 @@ router.get('/contractors', async (req, res) => {
 
 router.get('/user-info', async (req, res) => {})
 
+router.get('/pro-dashboard', (req, res) => {
+    res.json({ message: "Welcome to the Pro Dashboard!" });
+})
+
 router.get('/contractors/:id', async (req, res) => {})
 
 router.put('/contractors', async (req, res) => {

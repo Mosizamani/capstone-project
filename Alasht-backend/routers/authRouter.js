@@ -100,13 +100,27 @@ router.post('/auth/register', async (req, res, next) => {
 })
 
 // Login Route
-router.post(
-    '/auth/login',
-    passport.authenticate('local', {
-        successRedirect: '/home',
-        failureRedirect: '/home/login.html'
-    })
-)
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.status(401).json({ error: info.message || 'Login failed' });
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return next(err);
+            }
+            // Login successful, send user data or token
+            return res.status(200).json({
+                message: 'Login successful',
+                user: { id: user._id, username: user.username, userType: user.userType },
+            });
+        });
+    })(req, res, next);
+});
+
 
 // //... Handles the user reset password process
 // router.post('/forgotPassword', async (req, res, next) => {
@@ -119,8 +133,8 @@ router.post('/logout', (req, res, next) => {
         if (error) {
             return next(error);
         }
-        res.redirect('/home/login.html');
-    });
-});
+        res.redirect('/login')
+    })
+})
 
 module.exports = router
