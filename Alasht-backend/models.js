@@ -3,13 +3,6 @@ const mongoose = require('mongoose')
 //make a schema
 
 const ContractorSchema = new mongoose.Schema({
-    // username: {
-    // type: String,
-    // required: true,
-    // unique: true,
-    // trim: true,
-    // minlength: 4
-    // }, 
     firstname: {
     type: String,
     required: true,
@@ -29,7 +22,7 @@ const ContractorSchema = new mongoose.Schema({
     type: Array,
     required: true,
     },
-    project: {
+    projects: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
     },
@@ -221,9 +214,14 @@ const ClientSchema = new mongoose.Schema({
         required: true,
         trim: true,
         },
-    project: [{
+    projects: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project',
+        required: false
+    }],
+    contractors: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Contractor',
         required: false
     }],
     country: {
