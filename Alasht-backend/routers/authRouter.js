@@ -119,7 +119,7 @@ router.post('/login', (req, res, next) => {
             });
         });
     })(req, res, next);
-});
+})
 
 
 // //... Handles the user reset password process

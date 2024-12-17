@@ -29,6 +29,10 @@ const ContractorSchema = new mongoose.Schema({
     type: Array,
     required: true,
     },
+    project: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Project',
+    },
     payment: {
     type: String, 
     default: 'By contract',
@@ -126,12 +130,11 @@ const ProjectSchema = new mongoose.Schema({
         default: 'Under Review',
         required: true
     },
-    // contractor: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Contractor',
-    //     default: null,
-    //     required: false
-    // },
+    contractors: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Contractor',
+        required: false
+    }],
     location: {
         type: String,
         required: false,
@@ -198,4 +201,64 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema)
 
-module.exports = { Contractor, Project, User }
+const ClientSchema = new mongoose.Schema({
+    firstname: {
+        type: String,
+        required: true,
+        trim: true,
+        },
+    lastname: {
+        type: String,
+        required: true,
+        trim: true,
+        },
+    phone: {
+        type: Number,
+        required: true,
+        },
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        },
+    project: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project',
+        required: false
+    }],
+    country: {
+        type: String, 
+        default: 'USA',
+        required: true,
+        trim: true,
+        },
+    state: {
+        type: String,
+        required: false,
+        trim: true,
+        },
+    city: {
+        type: String,
+        required: false,
+        trim: true,
+        },
+    address:{
+        type: String,
+        required: false,
+        trim: true,
+        },
+    zip: {
+        type: String,
+        required: true,
+        trim: true,
+        },
+        createdDate: { 
+        type: Date,
+        required: true,
+        default: Date.now
+        }
+    }, {versionKey: false})
+
+const Client = mongoose.model('Client', ClientSchema)
+
+module.exports = { Contractor, Client, Project, User }
