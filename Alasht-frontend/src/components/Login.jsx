@@ -1,14 +1,18 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 
 const Login = () => {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
-        userType: "",
         rememberMe: false,
     })
 
+
+
     const [message, setMessage] = useState("")
+    const navigate = useNavigate() 
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -27,27 +31,32 @@ const handleSubmit = async (e) => {
                 body: JSON.stringify({
                     username: formData.username,
                     password: formData.password,
-                    userType: formData.userType,
                 }),
             })
 
-            const result = await response.json()
-
-            if (response.ok && formData.userType === "contractor") {
+            if (!response.ok) {
+                const errorResult = await response.json();
+                throw new Error(errorResult.error || "Login failed.");
+            }
+    
+            const result = await response.json();
+    
+            // Use userType returned from the backend
+            const { userType, user } = result;
+    
+            if (userType === "contractor") {
                 setMessage("Contractor login successful!");
-                // Optionally redirect or store user info
-                console.log("User info:", result.user)
-                window.location.href = "/pro-dashboard"
-            } else if (response.ok && formData.userType === "client") {
+                console.log("User info:", user);
+                navigate("/pro-dashboard");
+            } else if (userType === "client") {
                 setMessage("Client login successful!");
-                // Optionally redirect or store user info
-                console.log("User info:", result.user)
-                window.location.href = "/client-dashboard"
+                console.log("User info:", user);
+                navigate("/client-dashboard");
             } else {
-                setMessage(result.error || "Login failed.");
+                throw new Error("Invalid user type received.");
             }
         } catch (error) {
-            setMessage("An error occurred. Please try again.");
+            setMessage(error.message || "An error occurred. Please try again.");
             console.error("Error:", error);
         }
     }
