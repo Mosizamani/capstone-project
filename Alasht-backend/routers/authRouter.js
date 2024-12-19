@@ -56,7 +56,7 @@ passport.serializeUser(function(user, cb) {
 //... Deserializes the user information from the session
 passport.deserializeUser(function(user, cb) {
     process.nextTick(function() {
-        return cb(null, user);
+        return cb(null, user)
     })
 })
 
@@ -72,16 +72,16 @@ router.post('/auth/register', async (req, res, next) => {
         return res.status(400).json({ error: 'Invalid userType. Must be either client or contractor.' });
     }
 
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ username })
     if (existingUser) {
-        return res.status(409).json({ error: 'Username already exists.' });
+        return res.status(409).json({ error: 'Username already exists.' })
     }
 
-    const salt = crypto.randomBytes(16);
+    const salt = crypto.randomBytes(16)
 
     crypto.pbkdf2(password, salt, 310000, 32, 'sha256', async (error, hashedPassword) => {
         if (error) {
-            return next(error);
+            return next(error)
         }
 
         try {
@@ -106,19 +106,21 @@ router.post('/login', (req, res, next) => {
             return next(err);
         }
         if (!user) {
-            return res.status(401).json({ error: info.message || 'Login failed' });
+            return res.status(401).json({ error: info.message || 'Invalid username or password' });
         }
         req.logIn(user, (err) => {
             if (err) {
-                return next(err);
+                console.error("Login error:", err)
+                return next(err)
             }
             // Login successful, send user data or token
+            const { _id, username, userType } = user
             return res.status(200).json({
                 message: 'Login successful',
-                user: { id: user._id, username: user.username, userType: user.userType },
-            });
-        });
-    })(req, res, next);
+                user: { id: _id, username, userType },
+            })
+        })
+    })(req, res, next)
 })
 
 

@@ -24,6 +24,8 @@ const Login = () => {
 
 const handleSubmit = async (e) => {
         e.preventDefault()
+        setMessage("")
+
         try {
             const response = await fetch("http://localhost:4001/login", {
                 method: "POST",
@@ -32,6 +34,7 @@ const handleSubmit = async (e) => {
                     username: formData.username,
                     password: formData.password,
                 }),
+                withCredentials: true,
             })
 
             if (!response.ok) {
@@ -42,22 +45,26 @@ const handleSubmit = async (e) => {
             const result = await response.json();
     
             // Use userType returned from the backend
-            const { userType, user } = result;
+            const { userType, user } = result
+
+            if (!user || !result.userType || !result.user) {
+                throw new Error("Invalid response from server.");
+            }
     
-            if (userType === "contractor") {
-                setMessage("Contractor login successful!");
-                console.log("User info:", user);
-                navigate("/pro-dashboard");
-            } else if (userType === "client") {
-                setMessage("Client login successful!");
-                console.log("User info:", user);
-                navigate("/client-dashboard");
+            if (userType === 'contractor') {
+                setMessage("Contractor login successful!")
+                console.log("User info:", user)
+                navigate("/pro-dashboard")
+            } else if (userType === 'client') {
+                setMessage("Client login successful!")
+                console.log("User info:", user)
+                navigate("/client-dashboard")
             } else {
-                throw new Error("Invalid user type received.");
+                throw new Error("Invalid user type received.")
             }
         } catch (error) {
-            setMessage(error.message || "An error occurred. Please try again.");
-            console.error("Error:", error);
+            setMessage(error.message || "An error occurred. Please try again.")
+            console.error("Error:", error)
         }
     }
 

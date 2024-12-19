@@ -34,6 +34,7 @@ app.use(session({
 }))
 
 //... Initialize Passport.js to handle user sessions
+app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(proRouter)
