@@ -117,6 +117,7 @@ router.post('/login', (req, res, next) => {
             const { _id, username, userType } = user
             return res.status(200).json({
                 message: 'Login successful',
+                userType,
                 user: { id: _id, username, userType },
             })
         })

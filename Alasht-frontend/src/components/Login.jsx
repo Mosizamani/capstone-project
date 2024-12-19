@@ -47,7 +47,7 @@ const handleSubmit = async (e) => {
             // Use userType returned from the backend
             const { userType, user } = result
 
-            if (!user || !result.userType || !result.user) {
+            if (!user || !userType ) {
                 throw new Error("Invalid response from server.");
             }
     
