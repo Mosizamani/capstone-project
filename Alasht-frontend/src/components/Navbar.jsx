@@ -20,7 +20,7 @@ return (
             <span></span>
         </div>
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-            <Link to="/">Alasht®</Link>
+            <Link to="/home">Alasht®</Link>
             <Link to="/services">Services</Link>
             <Link to="/pro-dashboard">Pro Dashboard</Link>
             <Link to="/client-dashboard">Client Dashboard</Link>

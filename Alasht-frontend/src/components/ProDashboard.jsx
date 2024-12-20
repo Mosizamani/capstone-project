@@ -1,7 +1,11 @@
 import React from "react"
 import "./ProDashboard.css" // Ensure to style the dashboard for a polished look
+import { useNavigate } from "react-router-dom"
 
 export default function ProDashboard() {
+
+const navigate = useNavigate()
+
 const user = {
     name: "John Doe",
     email: "john.doe@example.com",
@@ -24,16 +28,37 @@ const handleFilter = (status) => {
     }
 }
 
+const handleLogout = async () => { 
+
+    try {
+    console.log("Attempting logout...")
+    const response = await fetch("http://localhost:4001/logout", { 
+        method: "POST", 
+        credentials: "include",
+    })
+
+    if (response.ok) {
+        navigate("/login")
+    } else {
+        console.error("Logout failed")
+    }
+    } catch (error) {
+    console.error("Error during logout:", error)
+    }
+}
+
 return (
     <div className="dashboard-container">
     {/* Left Sidebar */}
     <aside className="dashboard-sidebar">
         <div className="user-info">
+        
         <h2>User Information</h2>
         <p><strong>Name:</strong> {user.name}</p>
         <p><strong>Email:</strong> {user.email}</p>
         <p><strong>Role:</strong> {user.role}</p>
         </div>
+        <button onClick={handleLogout} className="logout-button">Logout</button>
     </aside>
 
     {/* Main Content */}

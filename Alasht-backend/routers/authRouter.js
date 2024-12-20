@@ -124,7 +124,6 @@ router.post('/login', (req, res, next) => {
     })(req, res, next)
 })
 
-
 // //... Handles the user reset password process
 // router.post('/forgotPassword', async (req, res, next) => {
 //     res.redirect('/app/resetPassword.html'); // Redirects to the reset password page
@@ -134,9 +133,13 @@ router.post('/login', (req, res, next) => {
 router.post('/logout', (req, res, next) => {
     req.logout((error) => {
         if (error) {
-            return next(error);
+            console.error("Error during logout:", error)
+            return next(error)
         }
-        res.redirect('/login')
+        res.status(200).json({ 
+            message: "Logout successful" 
+        })
+        console.log("Logout successful")
     })
 })
 
