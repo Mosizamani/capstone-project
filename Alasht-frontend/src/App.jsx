@@ -12,7 +12,6 @@ import ClientDashboard from './components/ClientDashboard'
 import ClientProfile from './components/ClientProfile'
 import ProjectForm from './components/ProjectForm'
 
-
 function App() {
 
   const handleFormSubmit = (formData) => {

@@ -7,8 +7,8 @@ export default function ClientProfile({ initialData = {} }) {
         lastname: initialData.lastname || "",
         phone: initialData.phone || "",
         email: initialData.email || "",
-        projects: initialData.projects || [],
-        contractors: initialData.contractors || [],
+        // projects: initialData.projects || [],
+        // contractors: initialData.contractors || [],
         country: initialData.country || "USA",
         state: initialData.state || "",
         city: initialData.city || "",
@@ -27,12 +27,14 @@ export default function ClientProfile({ initialData = {} }) {
         setFormData({ ...formData, [name]: value });
     }
 
-    const handleFormSubmit = async (formData) => {
-        e.preventDefault()
+    const [error, setError] = useState('')
+    
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:4001/editprofile1', {
-                method: 'POST',
+            const response = await fetch('http://localhost:4001/edit-profile', {
+                method: 'Post',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -42,27 +44,42 @@ export default function ClientProfile({ initialData = {} }) {
     
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error('Error submitting form:', errorData.message)
+                setError(errorData.message || 'An error occurred.')
             } else {
                 const result = await response.json();
                 console.log('Profile updated successfully:', result)
+                setError('')
             }
         } catch (error) {
             console.error('Error making API request:', error)
+            setError('Failed to connect to the server.')
         }
     }
 
     const navigate = useNavigate()
 
-    const handleBack = () => {
-        navigate("/client-profile")
+    const handleBack = async () => {
+        try {
+            const response = await fetch('http://localhost:4001/complete-profile', {
+                method: 'POST',
+                credentials: 'include',
+            })
+
+            if (!response.ok) {
+                console.error('Failed to complete profile')
+            }
+        } catch (error) {
+            console.error('Error completing profile:', error)
+        } finally {
+            navigate('/client-dashboard')
+        }
     }
 
     return (
         <div className="client-dashboard-container">
             {/* Left Sidebar */}
             <aside className="client-dashboard-sidebar">
-            <button onClick={handleBack} className="edit-profile-button">Return to Dashboard</button>
+            <button onClick={handleBack} className="edit-profile-button"> Return to Dashboard</button>
                 <div className="user-info">
                     <h2>User Information</h2>
                     <p><strong>Name:</strong> {user.name}</p>

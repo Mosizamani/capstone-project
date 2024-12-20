@@ -48,7 +48,7 @@ export default function ClientDashboard() {
     const handleEditProfile = async () => {
 
         try {
-        const response = await fetch("http://localhost:4001/editprofile", { 
+        const response = await fetch("http://localhost:4001/complete-client-profile", { 
             method: "POST", 
             credentials: "include",
         })
@@ -67,7 +67,7 @@ export default function ClientDashboard() {
         <div className="client-dashboard-container">
             {/* Left Sidebar */}
             <aside className="client-dashboard-sidebar">
-                <button onClick={handleEditProfile} className="edit-profile-button">Complete your Profile</button>
+                <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
                 <div className="user-info">
                     <h2>User Information</h2>
                     <p><strong>Name:</strong> {user.name}</p>

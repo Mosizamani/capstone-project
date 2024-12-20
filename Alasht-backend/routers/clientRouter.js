@@ -15,7 +15,7 @@ router.get('/user-info', async (req, res) => {})
 
 router.get('/projects/:id', async (req, res) => {})
 
-router.put('/projects', async (req, res) => {
+router.post('/projects', async (req, res) => {
 
     console.log(req.body)
     console.log("Project data received!")
@@ -81,13 +81,13 @@ router.patch('/projects/:id', async (req, res) => {})
 
 router.delete('/projects/:id', async (req, res) => {})
 
-router.post('/editprofile', (req, res) => {
+router.post('/complete-client-profile', (req, res) => {
     return res.status(200).json({
         message: "complete your profile"
     })
 })
 
-router.post('/editprofile1', async (req, res) => {
+router.post('/edit-profile', async (req, res) => {
     console.log(req.body)
     console.log("Profile data received!")
 
@@ -97,14 +97,23 @@ router.post('/editprofile1', async (req, res) => {
     if(!req.body.lastname) {
         return res.status(400).json({ message:'Last name is required to create a client' })
     }
-    if(!req.body.company) {
-        return res.status(400).json({ message:'Company is required to create a client' })
-    }
     if(!req.body.phone) {
         return res.status(400).json({ message:'Phone number is required to create a client' })
     }
     if(!req.body.email) {
         return res.status(400).json({ message:'Email is required to create a client' })
+    }
+    if(!req.body.country) {
+        return res.status(400).json({ message:'Country is required to create a client' })
+    }
+    if(!req.body.state) {
+        return res.status(400).json({ message:'State is required to create a client' })
+    }
+    if(!req.body.city) {
+        return res.status(400).json({ message:'City is required to create a client' })
+    }
+    if(!req.body.address) {
+        return res.status(400).json({ message:'Address is required to create a client' })
     }
     if(!req.body.zip) {
         return res.status(400).json({ message:'Zip code is required to create a client' })

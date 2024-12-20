@@ -61,6 +61,8 @@ async function fetchProfessional(data) {
     }
 }
 
+
+
 return (
     <form onSubmit={handleSubmit}>
         <h2>Complete your Profile</h2>

@@ -47,12 +47,30 @@ const handleLogout = async () => {
     }
 }
 
+const handleEditProfile = async () => {
+
+    try {
+    const response = await fetch("http://localhost:4001/complete-pro-profile", { 
+        method: "POST", 
+        credentials: "include",
+    })
+
+    if (response.ok) {
+        navigate("/professionalsignup")
+    } else {
+        console.error("")
+    }
+    } catch (error) {
+    console.error("Error during :", error)
+    }
+}
+
 return (
     <div className="dashboard-container">
     {/* Left Sidebar */}
     <aside className="dashboard-sidebar">
         <div className="user-info">
-        
+        <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
         <h2>User Information</h2>
         <p><strong>Name:</strong> {user.name}</p>
         <p><strong>Email:</strong> {user.email}</p>

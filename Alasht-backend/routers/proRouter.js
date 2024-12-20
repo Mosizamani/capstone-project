@@ -19,6 +19,12 @@ router.get('/pro-dashboard', (req, res) => {
 
 router.get('/contractors/:id', async (req, res) => {})
 
+router.post('/complete-pro-profile', (req, res) => {
+    return res.status(200).json({
+        message: "complete your profile"
+    })
+})
+
 router.put('/contractors', async (req, res) => {
 
     console.log("Received data:", req.body)
