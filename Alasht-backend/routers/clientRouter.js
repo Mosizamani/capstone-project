@@ -87,6 +87,12 @@ router.post('/client-complete-profile', (req, res) => {
     })
 })
 
+router.post('/new-projects', (req, res) => {
+    return res.status(200).json({
+        message: "complete your profile"
+    })
+})
+
 router.post('/edit-profile', async (req, res) => {
     console.log(req.body)
     console.log("Profile data received!")

@@ -63,11 +63,29 @@ export default function ClientDashboard() {
         }
     }
 
+    const handlePostProject = async () => {
+        try {
+            const response = await fetch("http://localhost:4001/new-projects", { 
+                method: "POST", 
+                credentials: "include",
+            })
+    
+            if (response.ok) {
+                navigate("/projects/new")
+            } else {
+                console.error("")
+            }
+            } catch (error) {
+            console.error("Error during :", error)
+            }
+    }
+
     return (
         <div className="client-dashboard-container">
             {/* Left Sidebar */}
             <aside className="client-dashboard-sidebar">
                 <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
+                <button onClick={handlePostProject} className="edit-profile-button">Post a new Project</button>
                 <div className="user-info">
                     <h2>User Information</h2>
                     <p><strong>Name:</strong> {user.name}</p>

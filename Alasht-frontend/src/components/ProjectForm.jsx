@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import ServiceInput from './ServiceInput'
+import { useNavigate } from 'react-router-dom'
 
 const ProjectForm = ({ onSubmit }) => {
 const [formData, setFormData] = useState({
@@ -18,6 +19,12 @@ const [formData, setFormData] = useState({
     city: '',
     zip: '',
 })
+
+const user = {
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    role: "Project Manager",
+}
 
 const [services, setServices] = useState([{ id: Date.now(), value: "" }]);
 const [message, setMessage] = useState("")
@@ -81,154 +88,189 @@ async function fetchProject(data) {
     }
 }
 
-return (
-    <form onSubmit={handleSubmit}>
-    <div>
-        <label>Project Name:</label>
-        <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-        />
-    </div>
-    <div>
-        <label>Select a service required:</label>
+const navigate = useNavigate()
 
-        {services.map((service, index) => (
-            <ServiceInput
-                key={service.id}
-                service={service}
-                name="services"
-                index={index}
-                onServiceChange={handleServiceChange}
-                onRemoveService={removeServiceInput}
-                addServiceInput={addServiceInput}
-                selectedServices={updateServiceOptions()}
-            />
-            ))}
-        <div id="message-container" style={{ color: "green", marginTop: "10px" }}>
-            {message}
-        </div>    
+const handleBack = async () => {
+    try {
+        const response = await fetch('http://localhost:4001/client-complete-profile', {
+            method: 'POST',
+            credentials: 'include',
+        })
+
+        if (!response.ok) {
+            console.error('Failed to complete profile')
+        }
+    } catch (error) {
+        console.error('Error completing profile:', error)
+    } finally {
+        navigate('/client-dashboard')
+    }
+}
+
+return (
+    <div className="client-dashboard-container">
+    {/* Left Sidebar */}
+    <aside className="client-dashboard-sidebar">
+    <button onClick={handleBack} className="edit-profile-button"> Return to Dashboard</button>
+        <div className="user-info">
+            <h2>User Information</h2>
+            <p><strong>Name:</strong> {user.name}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Role:</strong> {user.role}</p>
+        </div>
+    </aside>
+    {/* Main Content */}
+    <main className="client-dashboard-main">
+        {/* Edit Profile */}
+            <form onSubmit={handleSubmit}>
+            <div>
+                <label>Project Name:</label>
+                <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                />
+            </div>
+            <div>
+                <label>Select a service required:</label>
+
+                {services.map((service, index) => (
+                    <ServiceInput
+                        key={service.id}
+                        service={service}
+                        name="services"
+                        index={index}
+                        onServiceChange={handleServiceChange}
+                        onRemoveService={removeServiceInput}
+                        addServiceInput={addServiceInput}
+                        selectedServices={updateServiceOptions()}
+                    />
+                    ))}
+                <div id="message-container" style={{ color: "green", marginTop: "10px" }}>
+                    {message}
+                </div>    
+            </div>
+            <div>
+                <label>Description:</label>
+                <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                required
+                />
+            </div>
+            <div>
+                <label>Start Date:</label>
+                <input
+                type="date"
+                name="startDate"
+                value={formData.startDate}
+                onChange={handleChange}
+                required
+                />
+            </div>
+            <div>
+                <label>End Date:</label>
+                <input
+                type="date"
+                name="endDate"
+                value={formData.endDate}
+                onChange={handleChange}
+                />
+            </div>
+            <div>
+                <label>Budget:</label>
+                <input
+                type="number"
+                name="budget"
+                value={formData.budget}
+                onChange={handleChange}
+                required
+                />
+            </div>
+            <div>
+                <label>Status:</label>
+                <select
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                required
+                >
+                <option value="Under Review">Under Review</option>
+                <option value="Pending">Pending</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+            {/* <div>
+                <label>Contractor ID:</label>
+                <input
+                type="text"
+                name="contractor"
+                value={formData.contractor}
+                onChange={handleChange}
+                />
+                <p>If you have the contractors ID please write it down.</p>
+            </div> */}
+            <div>
+                <label>Location:</label>
+                <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                />
+            </div>
+            <div>
+                <label>Country:</label>
+                <input
+                type="text"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                required
+                />
+            </div>
+            <div>
+                <label>State:</label>
+                <input
+                type="text"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                required
+                />
+            </div>
+            <div>
+                <label>City:</label>
+                <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                required
+                />
+            </div>
+            <div>
+                <label>ZIP Code:</label>
+                <input
+                type="text"
+                name="zip"
+                value={formData.zip}
+                onChange={handleChange}
+                minLength={5}
+                maxLength={5}
+                pattern="\d{5}" // Optional, to ensure it's numeric
+                title="Please enter exactly 5 digits."
+                />
+            </div>
+            <button type="submit">Submit Project</button>
+            </form>
+        </main>
     </div>
-    <div>
-        <label>Description:</label>
-        <textarea
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-        required
-        />
-    </div>
-    <div>
-        <label>Start Date:</label>
-        <input
-        type="date"
-        name="startDate"
-        value={formData.startDate}
-        onChange={handleChange}
-        required
-        />
-    </div>
-    <div>
-        <label>End Date:</label>
-        <input
-        type="date"
-        name="endDate"
-        value={formData.endDate}
-        onChange={handleChange}
-        />
-    </div>
-    <div>
-        <label>Budget:</label>
-        <input
-        type="number"
-        name="budget"
-        value={formData.budget}
-        onChange={handleChange}
-        required
-        />
-    </div>
-    <div>
-        <label>Status:</label>
-        <select
-        name="status"
-        value={formData.status}
-        onChange={handleChange}
-        required
-        >
-        <option value="Under Review">Under Review</option>
-        <option value="Pending">Pending</option>
-        <option value="Ongoing">Ongoing</option>
-        <option value="Completed">Completed</option>
-        <option value="Cancelled">Cancelled</option>
-        </select>
-    </div>
-    {/* <div>
-        <label>Contractor ID:</label>
-        <input
-        type="text"
-        name="contractor"
-        value={formData.contractor}
-        onChange={handleChange}
-        />
-        <p>If you have the contractors ID please write it down.</p>
-    </div> */}
-    <div>
-        <label>Location:</label>
-        <input
-        type="text"
-        name="location"
-        value={formData.location}
-        onChange={handleChange}
-        />
-    </div>
-    <div>
-        <label>Country:</label>
-        <input
-        type="text"
-        name="country"
-        value={formData.country}
-        onChange={handleChange}
-        required
-        />
-    </div>
-    <div>
-        <label>State:</label>
-        <input
-        type="text"
-        name="state"
-        value={formData.state}
-        onChange={handleChange}
-        required
-        />
-    </div>
-    <div>
-        <label>City:</label>
-        <input
-        type="text"
-        name="city"
-        value={formData.city}
-        onChange={handleChange}
-        required
-        />
-    </div>
-    <div>
-        <label>ZIP Code:</label>
-        <input
-        type="text"
-        name="zip"
-        value={formData.zip}
-        onChange={handleChange}
-        minLength={5}
-        maxLength={5}
-        pattern="\d{5}" // Optional, to ensure it's numeric
-        title="Please enter exactly 5 digits."
-        />
-    </div>
-    <button type="submit">Submit Project</button>
-    </form>
 )
 }
 

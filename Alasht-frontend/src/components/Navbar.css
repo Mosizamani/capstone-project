@@ -8,6 +8,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background-color 0.3s ease
 }
 
 .logo-image {

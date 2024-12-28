@@ -24,10 +24,8 @@ return (
             <Link to="/services">Services</Link>
             <Link to="/pro-dashboard">Pro Dashboard</Link>
             <Link to="/client-dashboard">Client Dashboard</Link>
-            <Link to="/professionalsignup">Join as a Pro</Link>
             <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-            <Link to="/projects/new">Post a Project</Link>
+            <Link to="/signup">Signup</Link>       
         </div>
     </nav>
 )
