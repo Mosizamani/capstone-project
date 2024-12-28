@@ -64,98 +64,114 @@ async function fetchProfessional(data) {
 
 
 return (
-    <form onSubmit={handleSubmit}>
-        <h2>Complete your Profile</h2>
-        <label htmlFor="firstname">First Name: </label>
-        <input 
-        type="text" 
-        id="firstname" 
-        name="firstname" 
-        required />
-        <br />
-        <br />
-
-        <label htmlFor="lastname">Last Name: </label>
-        <input 
-        type="text" 
-        id="lastname" 
-        name="lastname" 
-        required />
-        <br />
-        <br />
-
-        <label htmlFor="company">Company: </label>
-        <input 
-        type="text" 
-        id="company" 
-        name="company" 
-        required />
-        <br />
-        <br />
-
-        <label htmlFor="skills">Skills: </label>
-        <div id="skills-container">
-            {skills.map((skill, index) => (
-            <SkillInput
-                key={skill.id}
-                skill={skill}
-                index={index}
-                onSkillChange={handleSkillChange}
-                onRemoveSkill={removeSkillInput}
-                addSkillInput={addSkillInput}
-                selectedSkills={updateSkillOptions()}
-            />
-            ))}
+    <div className="client-dashboard-container">
+    {/* Left Sidebar */}
+    <aside className="client-dashboard-sidebar">
+    <button onClick={handleBack} className="edit-profile-button"> Return to Dashboard</button>
+        <div className="user-info">
+            <h2>User Information</h2>
+            <p><strong>Name:</strong> {user.name}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Role:</strong> {user.role}</p>
         </div>
-        <div id="message-container" style={{ color: "green", marginTop: "10px" }}>
-            {message}
-        </div>
-        <br />
+    </aside>
+    {/* Main Content */}
+    <main className="client-dashboard-main">
+        {/* Edit Profile */}
+            <form onSubmit={handleSubmit}>
+                <h2>Complete your Profile</h2>
+                <label htmlFor="firstname">First Name: </label>
+                <input 
+                type="text" 
+                id="firstname" 
+                name="firstname" 
+                required />
+                <br />
+                <br />
 
-        <label htmlFor="payment">Payment: </label>
-        <input type="text" id="payment" name="payment" defaultValue="By contract" required />
-        <br />
-        <br />
+                <label htmlFor="lastname">Last Name: </label>
+                <input 
+                type="text" 
+                id="lastname" 
+                name="lastname" 
+                required />
+                <br />
+                <br />
 
-        {/* Remaining fields */}
-        <label htmlFor="phone">Phone Number: </label>
-        <input 
-        type="tel" 
-        id="phone" 
-        name="phone" 
-        required />
-        <br />
-        <br />
+                <label htmlFor="company">Company: </label>
+                <input 
+                type="text" 
+                id="company" 
+                name="company" 
+                required />
+                <br />
+                <br />
 
-        <label htmlFor="email">Email: </label>
-        <input type="email" id="email" name="email" required />
-        <br />
-        <br />
+                <label htmlFor="skills">Skills: </label>
+                <div id="skills-container">
+                    {skills.map((skill, index) => (
+                    <SkillInput
+                        key={skill.id}
+                        skill={skill}
+                        index={index}
+                        onSkillChange={handleSkillChange}
+                        onRemoveSkill={removeSkillInput}
+                        addSkillInput={addSkillInput}
+                        selectedSkills={updateSkillOptions()}
+                    />
+                    ))}
+                </div>
+                <div id="message-container" style={{ color: "green", marginTop: "10px" }}>
+                    {message}
+                </div>
+                <br />
 
-        <label htmlFor="country">Country: </label>
-        <select id="country" name="country" required defaultValue="USA">
-            <option value="USA">USA</option>
-            <option value="Canada">Canada</option>
-            <option value="Mexico">Mexico</option>
-        </select>
-        <br />
-        <br />
+                <label htmlFor="payment">Payment: </label>
+                <input type="text" id="payment" name="payment" defaultValue="By contract" required />
+                <br />
+                <br />
 
-        <label htmlFor="zip">Zip code: </label>
-        <input 
-        type="zip" 
-        id="zip" 
-        name="zip"
-        required
-        minLength={5}
-        maxLength={5}
-        pattern="\d{5}" // Optional, to ensure it's numeric
-        title="Please enter exactly 5 digits."
-        />
-        <br />
-        <br />
+                {/* Remaining fields */}
+                <label htmlFor="phone">Phone Number: </label>
+                <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                required />
+                <br />
+                <br />
 
-        <button type="submit">Submit</button>
-    </form>
+                <label htmlFor="email">Email: </label>
+                <input type="email" id="email" name="email" required />
+                <br />
+                <br />
+
+                <label htmlFor="country">Country: </label>
+                <select id="country" name="country" required defaultValue="USA">
+                    <option value="USA">USA</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Mexico">Mexico</option>
+                </select>
+                <br />
+                <br />
+
+                <label htmlFor="zip">Zip code: </label>
+                <input 
+                type="zip" 
+                id="zip" 
+                name="zip"
+                required
+                minLength={5}
+                maxLength={5}
+                pattern="\d{5}" // Optional, to ensure it's numeric
+                title="Please enter exactly 5 digits."
+                />
+                <br />
+                <br />
+
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+    </div>
 )
 }

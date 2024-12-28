@@ -7,8 +7,8 @@ export default function ProDashboard() {
 const navigate = useNavigate()
 
 const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
+    name: "Mostafa Zamaniturk",
+    email: "Eng.mzamanit@gmil.com",
     role: "Project Manager",
 }
 
@@ -70,19 +70,19 @@ return (
     {/* Left Sidebar */}
     <aside className="dashboard-sidebar">
         <div className="user-info">
-        <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
+        <button onClick={handleEditProfile} className="pro-edit-profile-button">Edit Profile</button>
         <h2>User Information</h2>
         <p><strong>Name:</strong> {user.name}</p>
         <p><strong>Email:</strong> {user.email}</p>
         <p><strong>Role:</strong> {user.role}</p>
         </div>
-        <button onClick={handleLogout} className="logout-button">Logout</button>
+        <button onClick={handleLogout} className="pro-logout-button">Logout</button>
     </aside>
 
     {/* Main Content */}
     <main className="dashboard-main">
         {/* Filter Bar */}
-        <div className="filter-bar">
+        <div className="pro-filter-bar">
         <button onClick={() => handleFilter("All")}>All Projects</button>
         <button onClick={() => handleFilter("In Progress")}>In Progress</button>
         <button onClick={() => handleFilter("Completed")}>Completed</button>

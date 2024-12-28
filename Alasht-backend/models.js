@@ -22,10 +22,10 @@ const ContractorSchema = new mongoose.Schema({
     type: Array,
     required: true,
     },
-    projects: {
+    projects: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
-    },
+    }],
     payment: {
     type: String, 
     default: 'By contract',

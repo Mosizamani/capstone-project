@@ -34,7 +34,7 @@ export default function ClientProfile({ initialData = {} }) {
 
         try {
             const response = await fetch('http://localhost:4001/edit-profile', {
-                method: 'Post',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
