@@ -50,7 +50,7 @@ const handleLogout = async () => {
 const handleEditProfile = async () => {
 
     try {
-    const response = await fetch("http://localhost:4001/complete-pro-profile", { 
+    const response = await fetch("http://localhost:4001/pro-complete-profile", { 
         method: "POST", 
         credentials: "include",
     })

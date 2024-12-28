@@ -1,6 +1,7 @@
 
 import React, { useState } from "react"
 import SkillInput from "./SkillInput"
+import { useNavigate } from "react-router-dom"
 
 export default function ProfessionalSignup () {
 const [skills, setSkills] = useState([{ id: Date.now(), value: "" }]);
@@ -22,6 +23,12 @@ const handleSkillChange = (id, value) => {
 const updateSkillOptions = () => {
     const selectedSkills = new Set(skills.map((skill) => skill.value.toLowerCase()).filter((val) => val));
     return selectedSkills
+}
+
+const user = {
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    role: "Project Manager",
 }
 
 const handleSubmit = async (event) => {
@@ -61,7 +68,24 @@ async function fetchProfessional(data) {
     }
 }
 
+const navigate = useNavigate()
 
+const handleBack = async () => {
+    try {
+        const response = await fetch('http://localhost:4001/pro-complete-profile', {
+            method: 'POST',
+            credentials: 'include',
+        })
+
+        if (!response.ok) {
+            console.error('Failed to complete profile')
+        }
+    } catch (error) {
+        console.error('Error completing profile:', error)
+    } finally {
+        navigate('/pro-dashboard')
+    }
+}
 
 return (
     <div className="client-dashboard-container">

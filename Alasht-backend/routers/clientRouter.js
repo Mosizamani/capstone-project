@@ -81,7 +81,7 @@ router.patch('/projects/:id', async (req, res) => {})
 
 router.delete('/projects/:id', async (req, res) => {})
 
-router.post('/complete-client-profile', (req, res) => {
+router.post('/client-complete-profile', (req, res) => {
     return res.status(200).json({
         message: "complete your profile"
     })

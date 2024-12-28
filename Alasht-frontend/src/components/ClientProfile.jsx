@@ -60,7 +60,7 @@ export default function ClientProfile({ initialData = {} }) {
 
     const handleBack = async () => {
         try {
-            const response = await fetch('http://localhost:4001/complete-profile', {
+            const response = await fetch('http://localhost:4001/client-complete-profile', {
                 method: 'POST',
                 credentials: 'include',
             })

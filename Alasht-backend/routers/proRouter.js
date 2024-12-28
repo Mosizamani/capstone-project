@@ -19,7 +19,7 @@ router.get('/pro-dashboard', (req, res) => {
 
 router.get('/contractors/:id', async (req, res) => {})
 
-router.post('/complete-pro-profile', (req, res) => {
+router.post('/pro-complete-profile', (req, res) => {
     return res.status(200).json({
         message: "complete your profile"
     })

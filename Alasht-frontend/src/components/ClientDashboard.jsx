@@ -48,7 +48,7 @@ export default function ClientDashboard() {
     const handleEditProfile = async () => {
 
         try {
-        const response = await fetch("http://localhost:4001/complete-client-profile", { 
+        const response = await fetch("http://localhost:4001/client-complete-profile", { 
             method: "POST", 
             credentials: "include",
         })
