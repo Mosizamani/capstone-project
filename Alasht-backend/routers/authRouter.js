@@ -85,14 +85,19 @@ router.post('/auth/register', async (req, res, next) => {
         }
 
         try {
-            const newUser = await User.create({
+            const user = await User.create({
                 username,
                 passwordSalt: salt.toString('base64'),
                 passwordHash: hashedPassword.toString('base64'),
                 userType
+
             })
 
-            res.status(201).json({ message: 'User created successfully.', userId: newUser._id });
+            if(!user) {
+                return next('Error while creating user')
+            }
+
+            res.status(201).json({ message: 'User created successfully.', userId: user._id });
         } catch (error) {
             next(error)
         }

@@ -128,10 +128,10 @@ const ProjectSchema = new mongoose.Schema({
         ref: 'Contractor',
         required: false
     }],
-    client: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Client',
-        required: false
+        ref: 'User',
+        required: true
     },
     location: {
         type: String,

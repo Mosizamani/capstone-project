@@ -4,31 +4,38 @@ const { Project, Client } = require('../models')
 
 const router = express.Router()
 
-router.get('/projects', async (req, res) => {
-    const projects = await Project.find({
-        user: req.user._id
-    })
-    return res.status(200).json(projects)
-})
-
 router.get('/user-info', async (req, res) => {})
 
 router.get('/projects/:id', async (req, res) => {
 
 })
 
-// router.get('/projects', ensureAuthenticated, async (req, res) => {
-//     try {
-//         const projects = await Project.find({ user: req.user.id }); // Fetch projects for the logged-in user
-//         res.status(200).json(projects);
-//     } catch (error) {
-//         console.error('Error fetching projects', error);
-//         res.status(500).json({ message: 'Internal server error' });
-//     }
-// });
+router.get('/projects', async (req, res) => {
 
+    const projects = await Project.find({ 
+        user: req.user.id
+    }) // Fetch projects for the logged-in user
+    res.status(200).json(projects)
+
+    try {
+
+        if (!req.user) {
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+
+        if (req.user.userType !== 'client') {
+            return res.status(403).json({ message: 'Access denied: Only clients can view these projects.' });
+        }
+
+    } catch (error) {
+        console.error('Error fetching projects', error)
+        res.status(500).json({ message: 'Internal server error' })
+    }
+})
 
 router.put('/projects', async (req, res) => {
+
+
 
     console.log(req.body)
     console.log("Project data received!")
@@ -58,8 +65,8 @@ router.put('/projects', async (req, res) => {
             state: req.body.state,
             city: req.body.city,
             zip: req.body.zip,
+            user: req.user.id,
             
-            // user: req.user.id,
             // contractor: req.body.contractor,
             createdDate: req.body.createdDate
         })
@@ -68,7 +75,6 @@ router.put('/projects', async (req, res) => {
         console.error('Error creating project',error)
         return res.status(500).json({ message: 'Internal server error' })
     }
-
 })
 
 router.patch('/projects/:id', async (req, res) => {})

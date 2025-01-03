@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/contractors', async (req, res) => {
     const contractors = await Contractor.find({
-        user: req.user._id
+        
     })
     return res.status(200).json(contractors)
 })
