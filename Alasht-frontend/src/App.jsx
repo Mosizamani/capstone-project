@@ -22,7 +22,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
-        <Route path="/home" element={<Home />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/services" element={<Services />} ></Route>
         <Route path="/professionalsignup" element={<ProfessionalSignup />} ></Route>
         <Route path="/login" element={<Login />} ></Route>

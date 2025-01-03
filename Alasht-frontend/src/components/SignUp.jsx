@@ -26,6 +26,12 @@ const Signup = () => {
                 const data = await response.json();
                 setMessage("User registered successfully!");
                 setMessageColor("green"); // Success message in green
+
+                setUsername("")
+                setPassword("")
+
+                
+
             } else {
                 const errorData = await response.json();
                 setMessage(errorData.error || "Error registering user.");

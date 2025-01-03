@@ -113,6 +113,8 @@ router.post('/login', (req, res, next) => {
                 console.error("Login error:", err)
                 return next(err)
             }
+
+            console.log(req.user)
             // Login successful, send user data or token
             const { _id, username, userType } = user
             return res.status(200).json({

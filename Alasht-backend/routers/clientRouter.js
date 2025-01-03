@@ -13,47 +13,39 @@ router.get('/projects', async (req, res) => {
 
 router.get('/user-info', async (req, res) => {})
 
-router.get('/projects/:id', async (req, res) => {})
+router.get('/projects/:id', async (req, res) => {
 
-router.post('/projects', async (req, res) => {
+})
+
+// router.get('/projects', ensureAuthenticated, async (req, res) => {
+//     try {
+//         const projects = await Project.find({ user: req.user.id }); // Fetch projects for the logged-in user
+//         res.status(200).json(projects);
+//     } catch (error) {
+//         console.error('Error fetching projects', error);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// });
+
+
+router.put('/projects', async (req, res) => {
 
     console.log(req.body)
     console.log("Project data received!")
 
-    if(!req.body.name) {
-        return res.status(400).json({ message:' field is required to create a project' })
-    }
-    if(!req.body.services) {
-        return res.status(400).json({ message:'At least one service is required to create a project' })
-    }
-    if(!req.body.description) {
-        return res.status(400).json({ message:'Description is required to create a project' })
-    }
-    if(!req.body.startDate) {
-        return res.status(400).json({ message:'Start date is required to create a project' })
-    }
-    if(!req.body.budget) {
-        return res.status(400).json({ message:'Budget is required to create a project' })
-    }
-    if(!req.body.location) {
-        return res.status(400).json({ message:'Location is required to create a project' })
-    }
-    if(!req.body.country) {
-        return res.status(400).json({ message:'Country is required to create a project' })
-    }
-    if(!req.body.state) {
-        return res.status(400).json({ message:'State is required to create a project' })
-    }
-    if(!req.body.city) {
-        return res.status(400).json({ message:'City is required to create a project' })
-    }
-    if(!req.body.zip) {
-        return res.status(400).json({ message:'Zip code is required to create a project' })
+    const requiredFields = [
+        "name", "services", "description", "startDate", "budget",
+        "location", "country", "state", "city", "zip"
+    ];
+
+    for (const field of requiredFields) {
+        if (!req.body[field]) {
+            return res.status(400).json({ message: `${field} is required to create a project` });
+        }
     }
 
     try {
         const project = await Project.create({
-            // user: req.user._id,
             name: req.body.name,
             services: req.body.services,
             description: req.body.description,
@@ -61,12 +53,14 @@ router.post('/projects', async (req, res) => {
             endDate: req.body.endDate,
             budget: req.body.budget,
             status: req.body.status,
-            // contractor: req.body.contractor,
             location: req.body.location,
             country: req.body.country,
             state: req.body.state,
             city: req.body.city,
             zip: req.body.zip,
+            
+            // user: req.user.id,
+            // contractor: req.body.contractor,
             createdDate: req.body.createdDate
         })
         return res.status(201).json(project)

@@ -7,7 +7,7 @@ const [isOpen, setIsOpen] = useState(false);
 
 const toggleMenu = () => {
     setIsOpen(!isOpen);
-};
+}
 
 return (
     <nav className="navbar">
@@ -20,7 +20,7 @@ return (
             <span></span>
         </div>
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-            <Link to="/home">Alasht®</Link>
+            <Link to="/">Alasht®</Link>
             <Link to="/services">Services</Link>
             <Link to="/pro-dashboard">Pro Dashboard</Link>
             <Link to="/client-dashboard">Client Dashboard</Link>

@@ -8,7 +8,7 @@ const navigate = useNavigate()
 
 const user = {
     name: "Mostafa Zamaniturk",
-    email: "Eng.mzamanit@gmil.com",
+    email: "Eng.mzamanit@gmail.com",
     role: "Project Manager",
 }
 

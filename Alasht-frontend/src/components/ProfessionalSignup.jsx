@@ -50,15 +50,25 @@ const handleSubmit = async (event) => {
 
 async function fetchProfessional(data) {
     try {
+
+        if (!data.firstname || !data.lastname || !data.email) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
         const response = await fetch("http://localhost:4001/contractors", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
-            withCredentials: true
+            WithCredentials: true
         })
 
         if (response.ok) {
             alert("Form submitted successfully!");
+        } else if (response.status === 400) {
+            alert("Bad request. Please check the form data.");
+        } else if (response.status === 401) {
+            alert("Unauthorized. Please log in.");
         } else {
             alert("Failed to submit form.");
         }

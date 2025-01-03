@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ServiceInput from './ServiceInput'
 import { useNavigate } from 'react-router-dom'
 
-const ProjectForm = ({ onSubmit }) => {
+const ProjectForm = () => {
 const [formData, setFormData] = useState({
     name: '',
     service:'',

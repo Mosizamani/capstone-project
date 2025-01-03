@@ -17,7 +17,9 @@ router.get('/pro-dashboard', (req, res) => {
     res.json({ message: "Welcome to the Pro Dashboard!" });
 })
 
-router.get('/contractors/:id', async (req, res) => {})
+router.get('/contractors/:id', async (req, res) => {
+
+})
 
 router.post('/pro-complete-profile', (req, res) => {
     return res.status(200).json({
@@ -29,6 +31,9 @@ router.put('/contractors', async (req, res) => {
 
     console.log("Received data:", req.body)
 
+    // if (!req.user || !req.user._id) {
+    //     return res.status(401).json({ message: 'User not authenticated' });
+    // }
     if(!req.body.firstname) {
         return res.status(400).json({ message:'First name is required to create a contractor' })
     }
@@ -73,10 +78,41 @@ router.put('/contractors', async (req, res) => {
         console.error('Error creating contractor:', error)
         return res.status(500).json({ message: 'Internal server error' });
     }
-
 })
 
-router.patch('/contractors/:id', async (req, res) => {})
+router.patch('/contractors/:id', async (req, res) => {
+    if(!req.params.id) {
+        return res.status(400).json({ message:'Contractor ID is required'})
+    }
+
+    try {
+        await Contractor.updateOne({ 
+            _id: req.params.id 
+        }, {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            company: req.body.company,
+            skills: req.body.skills,
+            payment: req.body.payment,
+            phone: req.body.phone,
+            email: req.body.email,
+            country: req.body.country,
+            zip: req.body.zip,
+            createdDate: req.body.createdDate
+        })
+
+        const contractor = await Contractor.findOne({ _id: req.params.id })
+
+        if (!contractor) {
+            return res.status(404).json({ message: 'Contractor not found' })
+        }
+
+        return res.status(200).json(contractor)
+    } catch (error) {
+        console.error('Error updating contractor:', error)
+        return res.status(404).json({ message: 'Update contractor information failed' })
+    }
+})
 
 router.delete('/contractors/:id', async (req, res) => {})
 

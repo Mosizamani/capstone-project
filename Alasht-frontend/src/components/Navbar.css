@@ -5,10 +5,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: background-color 0.3s ease
+    position: sticky; /* Keeps it at the top */
+    top: 0; /* Ensures it stays at the top */
+    z-index: 1000; /* Keeps it above other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow for better visibility */
+    transition: background-color 0.3s ease;
 }
 
 .logo-image {
