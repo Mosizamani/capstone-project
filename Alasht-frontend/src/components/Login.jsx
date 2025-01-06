@@ -37,7 +37,7 @@ const handleSubmit = async (e) => {
 
             if (!response.ok) {
                 const errorResult = await response.json();
-                throw new Error(errorResult.error || "Login failed.");
+                throw new Error(errorResult.error || "Login failed.")
             }
     
             const result = await response.json();

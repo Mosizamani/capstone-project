@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import ServiceInput from './ServiceInput'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,6 +17,7 @@ const [formData, setFormData] = useState({
     state: '',
     city: '',
     zip: '',
+    
 })
 
 const user = {

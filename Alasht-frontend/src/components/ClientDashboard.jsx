@@ -63,23 +63,23 @@ export default function ClientDashboard() {
         }
     }
 
-    const ProjectPool = async () => {
-        try {
-            const response = await fetch("http://localhost:4001/projects", {
-                method: "GET",
-                credentials: "include",
-            });
+    // const ProjectPool = async () => {
+    //     try {
+    //         const response = await fetch("http://localhost:4001/projects", {
+    //             method: "GET",
+    //             credentials: "include",
+    //         });
 
-            if (response.ok) {
-                const data = await response.json();
-                setFilteredProject(data);
-            } else {
-                console.error("Failed to fetch projects");
-            }
-        } catch (error) {
-            console.error("Error fetching projects:", error);
-        }
-    }
+    //         if (response.ok) {
+    //             const data = await response.json();
+    //             setFilteredProject(data);
+    //         } else {
+    //             console.error("Failed to fetch projects");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error fetching projects:", error);
+    //     }
+    // }
 
     const handlePostProject = async () => {
         try {
@@ -102,9 +102,10 @@ export default function ClientDashboard() {
         <div className="client-dashboard-container">
             {/* Left Sidebar */}
             <aside className="client-dashboard-sidebar">
-                <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
-                <button onClick={handlePostProject} className="edit-profile-button">Post a new Project</button>
+                <h2>Client's Dashboard</h2>
                 <div className="user-info">
+                    <button onClick={handleEditProfile} className="edit-profile-button">Edit Profile</button>
+                    <button onClick={handlePostProject} className="edit-profile-button">Post a new Project</button>
                     <h2>User Information</h2>
                     <p><strong>Name:</strong> {user.name}</p>
                     <p><strong>Email:</strong> {user.email}</p>

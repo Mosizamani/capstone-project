@@ -65,8 +65,7 @@ router.put('/projects', async (req, res) => {
             state: req.body.state,
             city: req.body.city,
             zip: req.body.zip,
-            user: req.user.id,
-            
+            // user: req.user.id,
             // contractor: req.body.contractor,
             createdDate: req.body.createdDate
         })

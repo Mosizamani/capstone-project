@@ -69,12 +69,13 @@ return (
     <div className="dashboard-container">
     {/* Left Sidebar */}
     <aside className="dashboard-sidebar">
+        <h2>Pro's Dashboard</h2>
         <div className="user-info">
-        <button onClick={handleEditProfile} className="pro-edit-profile-button">Edit Profile</button>
-        <h2>User Information</h2>
-        <p><strong>Name:</strong> {user.name}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Role:</strong> {user.role}</p>
+            <button onClick={handleEditProfile} className="pro-edit-profile-button">Edit Profile</button>
+            <h2>User Information</h2>
+            <p><strong>Name:</strong> {user.name}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Role:</strong> {user.role}</p>
         </div>
         <button onClick={handleLogout} className="pro-logout-button">Logout</button>
     </aside>
