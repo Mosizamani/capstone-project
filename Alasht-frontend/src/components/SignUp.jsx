@@ -14,7 +14,7 @@ const Signup = () => {
 
     const signupUser = async (username, password, userType) => {
         try {
-            const response = await fetch("http://localhost:4001/auth/register", {
+            const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -32,7 +32,7 @@ const handleLogout = async () => {
 
     try {
     console.log("Attempting logout...")
-    const response = await fetch("http://localhost:4001/logout", { 
+    const response = await fetch(`${API_URL}/logout`, { 
         method: "POST", 
         credentials: "include",
     })
@@ -50,7 +50,7 @@ const handleLogout = async () => {
 const handleEditProfile = async () => {
 
     try {
-    const response = await fetch("http://localhost:4001/pro-complete-profile", { 
+    const response = await fetch(`${API_URL}/pro-complete-profile`, { 
         method: "POST", 
         credentials: "include",
     })

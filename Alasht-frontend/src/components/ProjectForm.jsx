@@ -70,7 +70,7 @@ const handleSubmit = async (e) => {
 
 async function fetchProject(data) {
     try {
-        const response = await fetch("http://localhost:4001/projects", {
+        const response = await fetch(`${API_URL}/projects`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -92,7 +92,7 @@ const navigate = useNavigate()
 
 const handleBack = async () => {
     try {
-        const response = await fetch('http://localhost:4001/client-complete-profile', {
+        const response = await fetch(`${API_URL}/client-complete-profile`, {
             method: 'POST',
             credentials: 'include',
         })

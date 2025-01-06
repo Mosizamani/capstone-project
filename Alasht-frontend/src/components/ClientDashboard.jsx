@@ -30,7 +30,7 @@ export default function ClientDashboard() {
     const handleLogout = async () => {
         try {
             console.log("Attempting logout...");
-            const response = await fetch("http://localhost:4001/logout", {
+            const response = await fetch(`${API_URL}/logout`, {
                 method: "POST",
                 credentials: "include",
             });
@@ -48,7 +48,7 @@ export default function ClientDashboard() {
     const handleEditProfile = async () => {
 
         try {
-        const response = await fetch("http://localhost:4001/client-complete-profile", { 
+        const response = await fetch(`${API_URL}/client-complete-profile`, { 
             method: "POST", 
             credentials: "include",
         })
@@ -83,7 +83,7 @@ export default function ClientDashboard() {
 
     const handlePostProject = async () => {
         try {
-            const response = await fetch("http://localhost:4001/new-projects", { 
+            const response = await fetch(`${API_URL}/new-projects`, { 
                 method: "POST", 
                 credentials: "include",
             })
