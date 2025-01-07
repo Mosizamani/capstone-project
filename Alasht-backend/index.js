@@ -36,12 +36,13 @@ app.use(session({
     secret: sessionSecret,  //... Secret key for signing the session ID cookie
     resave: false,  //... Do not save session if unmodified
     saveUninitialized: false,  //... Do not create session until something is stored
-    store: MongoStore.create({
-        mongoUrl: mongodbUrl, // Your MongoDB connection URL
-        collectionName: 'sessions', // Optional: specify a collection name
-    }),
+    // store: MongoStore.create({
+    //     mongoUrl: mongodbUrl, // Your MongoDB connection URL
+    //     collectionName: 'sessions', // Optional: specify a collection name
+    // }),
     cookie: { 
-        secure: process.env.NODE_ENV === 'production',  //... Set to `true` if using HTTPS
+        secure: false,
+        // secure: process.env.NODE_ENV === 'production',  //... Set to `true` if using HTTPS
         maxAge: 1000 * 60 * 60 * 24  //... Session cookie expires in 24 hours
     }
 }))

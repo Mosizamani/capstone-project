@@ -1,5 +1,5 @@
 const express = require('express')
-
+const mongoose = require('mongoose')
 const { Project, Client } = require('../models')
 
 const router = express.Router()
@@ -13,7 +13,7 @@ router.get('/projects/:id', async (req, res) => {
 router.get('/projects', async (req, res) => {
 
     const projects = await Project.find({ 
-        user: req.user.id
+        // user: req.user.id
     }) // Fetch projects for the logged-in user
     res.status(200).json(projects)
 
@@ -35,15 +35,13 @@ router.get('/projects', async (req, res) => {
 
 router.put('/projects', async (req, res) => {
 
-
-
     console.log(req.body)
     console.log("Project data received!")
 
     const requiredFields = [
         "name", "services", "description", "startDate", "budget",
         "location", "country", "state", "city", "zip"
-    ];
+    ]
 
     for (const field of requiredFields) {
         if (!req.body[field]) {
@@ -67,7 +65,7 @@ router.put('/projects', async (req, res) => {
             state: req.body.state,
             city: req.body.city,
             zip: req.body.zip,
-            user:mongoose.Types.ObjectId(req.user.id),
+            // user:mongoose.Types.ObjectId(req.user.id),
             // contractor: req.body.contractor,
             createdDate: req.body.createdDate
         })
