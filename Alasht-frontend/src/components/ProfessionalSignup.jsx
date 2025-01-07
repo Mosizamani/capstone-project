@@ -56,7 +56,7 @@ async function fetchProfessional(data) {
             return;
         }
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL_F}/contractors`, {
+        const response = await fetch('http://localhost:4001/contractors', {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -82,7 +82,7 @@ const navigate = useNavigate()
 
 const handleBack = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL_F}/pro-complete-profile`, {
+        const response = await fetch('http://localhost:4001/pro-complete-profile', {
             method: 'POST',
             credentials: 'include',
         })

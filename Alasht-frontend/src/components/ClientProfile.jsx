@@ -33,7 +33,7 @@ export default function ClientProfile({ initialData = {} }) {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL_F}/edit-profile`, {
+            const response = await fetch("http://localhost:4001/edit-profile", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export default function ClientProfile({ initialData = {} }) {
 
     const handleBack = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL_F}/client-complete-profile`, {
+            const response = await fetch("http://localhost:4001/client-complete-profile", {
                 method: 'POST',
                 credentials: 'include',
             })
