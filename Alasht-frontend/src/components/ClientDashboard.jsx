@@ -2,6 +2,7 @@ import React from "react";
 import "./ClientDashboard.css"; // Include the styles for the client dashboard
 import { useNavigate } from "react-router-dom";
 
+
 export default function ClientDashboard() {
     const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ export default function ClientDashboard() {
     const handleLogout = async () => {
         try {
             console.log("Attempting logout...");
-            const response = await fetch(`${API_URL}/logout`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL_F}/logout`, {
                 method: "POST",
                 credentials: "include",
             });
@@ -48,7 +49,7 @@ export default function ClientDashboard() {
     const handleEditProfile = async () => {
 
         try {
-        const response = await fetch(`${API_URL}/client-complete-profile`, { 
+        const response = await fetch(`${import.meta.env.VITE_API_URL_F}/client-complete-profile`, { 
             method: "POST", 
             credentials: "include",
         })
@@ -83,7 +84,7 @@ export default function ClientDashboard() {
 
     const handlePostProject = async () => {
         try {
-            const response = await fetch(`${API_URL}/new-projects`, { 
+            const response = await fetch(`${import.meta.env.VITE_API_URL_F}/new-projects`, { 
                 method: "POST", 
                 credentials: "include",
             })

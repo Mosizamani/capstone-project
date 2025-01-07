@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ServiceInput from './ServiceInput'
 import { useNavigate } from 'react-router-dom'
+import.meta.env.API_URL
 
 const ProjectForm = () => {
 const [formData, setFormData] = useState({

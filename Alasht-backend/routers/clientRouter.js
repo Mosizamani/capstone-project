@@ -51,6 +51,8 @@ router.put('/projects', async (req, res) => {
         }
     }
 
+    console.log(req.user)
+
     try {
         const project = await Project.create({
             name: req.body.name,
@@ -65,7 +67,7 @@ router.put('/projects', async (req, res) => {
             state: req.body.state,
             city: req.body.city,
             zip: req.body.zip,
-            // user: req.user.id,
+            user:mongoose.Types.ObjectId(req.user.id),
             // contractor: req.body.contractor,
             createdDate: req.body.createdDate
         })

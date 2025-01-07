@@ -12,13 +12,13 @@ const port = process.env.PORT || 4001
 const sessionSecret = process.env.SESSION_SECRET
 const mongodbUrl = process.env.DATA_BASE_URL
 
-// const loggedIn = (req, res, next) => {
-//     if (req.user) {
-//         next()
-//     } else {
-//         res.redirect('/login')
-//     }
-// }
+const loggedIn = (req, res, next) => {
+    if (req.user) {
+        next()
+    } else {
+        res.redirect('/login')
+    }
+}
 
 const proRouter = require('./routers/proRouter')
 const clientRouter = require('./routers/clientRouter')
@@ -45,9 +45,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(proRouter)
+app.use('/', loggedIn,proRouter)
 
-app.use( clientRouter)
+app.use('/', loggedIn, clientRouter)
 
 app.use(authRouter)
 
