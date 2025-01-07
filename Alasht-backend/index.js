@@ -26,7 +26,7 @@ const clientRouter = require('./routers/clientRouter')
 const authRouter = require('./routers/authRouter')
 
 app.use(express.json())
-app.use(express.static('front-end'))
+app.use(express.static('./Alasht-frontend'))
 app.use(cors({
     origin: process.env.FRONT_END_URL,
     credentials: true
