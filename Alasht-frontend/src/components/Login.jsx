@@ -32,7 +32,7 @@ const handleSubmit = async (e) => {
                     username: formData.username,
                     password: formData.password,
                 }),
-                withCredentials: true,
+                credentials: "include",
             })
 
             if (!response.ok) {

@@ -54,12 +54,22 @@ passport.serializeUser(function(user, cb) {
     })
 })
 
-//... Deserializes the user information from the session
-passport.deserializeUser(function(user, cb) {
-    process.nextTick(function() {
-        return cb(null, user)
-    })
-})
+// //... Deserializes the user information from the session
+// passport.deserializeUser(function(user, cb) {
+//     process.nextTick(function() {
+//         return cb(null, user)
+//     })
+// })
+
+passport.deserializeUser(async function (user, cb) {
+    try {
+        // Optionally fetch the full user from the database if needed
+        const fullUser = await User.findById(user.id);
+        cb(null, fullUser || user);
+    } catch (err) {
+        cb(err);
+    }
+});
 
 // Registration Route
 router.post('/auth/register', async (req, res, next) => {
@@ -114,13 +124,32 @@ router.post('/login', (req, res, next) => {
         if (!user) {
             return res.status(401).json({ error: info.message || 'Invalid username or password' });
         }
-        req.logIn(user, (err) => {
+        req.logIn(user, async (err) => {
             if (err) {
                 console.error("Login error:", err)
                 return next(err)
             }
 
             console.log(req.user)
+
+        //     try {
+        //         // Fetch the full user object if needed
+        //         const fullUser = await User.findById(user._id);
+
+        //         if (!fullUser) {
+        //             return res.status(404).json({ error: 'User not found' });
+        //         }
+
+        //         const { _id, username, userType } = fullUser;
+        //         return res.status(200).json({
+        //             message: 'Login successful',
+        //             user: { id: _id, username, userType },
+        //         });
+        //     } catch (error) {
+        //         return next(error);
+        //     }
+        // });
+
             // Login successful, send user data or token
             const { _id, username, userType } = user
             return res.status(200).json({

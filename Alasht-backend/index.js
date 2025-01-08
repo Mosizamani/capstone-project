@@ -29,7 +29,7 @@ app.use(express.json())
 app.use(express.static('./Alasht-frontend'))
 app.use(cors({
     origin: process.env.FRONT_END_URL,
-    credentials: true
+    credentials: true,
 }))
 
 app.use(session({

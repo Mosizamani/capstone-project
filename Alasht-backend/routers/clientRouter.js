@@ -35,21 +35,22 @@ router.get('/projects', async (req, res) => {
 
 router.put('/projects', async (req, res) => {
 
-    console.log(req.body)
-    console.log("Project data received!")
-
     const requiredFields = [
         "name", "services", "description", "startDate", "budget",
         "location", "country", "state", "city", "zip"
     ]
-
+    
     for (const field of requiredFields) {
         if (!req.body[field]) {
             return res.status(400).json({ message: `${field} is required to create a project` });
         }
     }
-
+    
+    console.log(req.body)
+    console.log("Project data received!")
     console.log(req.user)
+    console.log(req.headers)
+
 
     try {
         const project = await Project.create({
@@ -65,7 +66,7 @@ router.put('/projects', async (req, res) => {
             state: req.body.state,
             city: req.body.city,
             zip: req.body.zip,
-            // user:mongoose.Types.ObjectId(req.user.id),
+            user: mongoose.Types.ObjectId(req.user.id),
             // contractor: req.body.contractor,
             createdDate: req.body.createdDate
         })

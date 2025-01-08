@@ -60,7 +60,7 @@ async function fetchProfessional(data) {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
-            WithCredentials: true
+            credentials: 'include',
         })
 
         if (response.ok) {

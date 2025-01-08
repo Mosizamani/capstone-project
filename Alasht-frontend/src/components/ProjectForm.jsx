@@ -74,7 +74,7 @@ async function fetchProject(data) {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
-            withCredentials: true
+            credentials: 'include',
         })
 
         if (response.ok) {
