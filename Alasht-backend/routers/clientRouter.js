@@ -66,7 +66,7 @@ router.put('/projects', async (req, res) => {
             state: req.body.state,
             city: req.body.city,
             zip: req.body.zip,
-            user: mongoose.Types.ObjectId(req.user.id),
+            user: new mongoose.Types.ObjectId(req.user.id),
             // contractor: req.body.contractor,
             createdDate: req.body.createdDate
         })

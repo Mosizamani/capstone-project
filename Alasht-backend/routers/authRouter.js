@@ -54,22 +54,12 @@ passport.serializeUser(function(user, cb) {
     })
 })
 
-// //... Deserializes the user information from the session
-// passport.deserializeUser(function(user, cb) {
-//     process.nextTick(function() {
-//         return cb(null, user)
-//     })
-// })
-
-passport.deserializeUser(async function (user, cb) {
-    try {
-        // Optionally fetch the full user from the database if needed
-        const fullUser = await User.findById(user.id);
-        cb(null, fullUser || user);
-    } catch (err) {
-        cb(err);
-    }
-});
+//... Deserializes the user information from the session
+passport.deserializeUser(function(user, cb) {
+    process.nextTick(function() {
+        return cb(null, user)
+    })
+})
 
 // Registration Route
 router.post('/auth/register', async (req, res, next) => {
