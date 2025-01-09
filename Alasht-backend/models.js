@@ -26,6 +26,11 @@ const ContractorSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
     }],
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     payment: {
     type: String, 
     default: 'By contract',
@@ -229,6 +234,11 @@ const ClientSchema = new mongoose.Schema({
         ref: 'Contractor',
         required: false
     }],
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     country: {
         type: String, 
         default: 'USA',

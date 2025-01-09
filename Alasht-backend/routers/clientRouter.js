@@ -94,8 +94,10 @@ router.post('/new-projects', (req, res) => {
 })
 
 router.post('/edit-profile', async (req, res) => {
+
     console.log(req.body)
     console.log("Profile data received!")
+    console.log(req.user)
 
     if(!req.body.firstname) {
         return res.status(400).json({ message:'First name is required to create a client' })
@@ -127,7 +129,6 @@ router.post('/edit-profile', async (req, res) => {
 
     try {
         const client = await Client.create({
-            // user: req.user._id,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
@@ -137,6 +138,7 @@ router.post('/edit-profile', async (req, res) => {
             city: req.body.city,
             address: req.body.address,
             zip: req.body.zip,
+            user: new mongoose.Types.ObjectId(req.user.id),
             createdDate: req.body.createdDate
         })
         return res.status(201).json(client)

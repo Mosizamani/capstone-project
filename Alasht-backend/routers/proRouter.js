@@ -1,5 +1,5 @@
 const express = require('express')
-
+const mongoose = require('mongoose')
 const { Contractor } = require('../models')
 
 const router = express.Router()
@@ -30,10 +30,7 @@ router.post('/pro-complete-profile', (req, res) => {
 router.put('/contractors', async (req, res) => {
 
     console.log("Received data:", req.body)
-
-    // if (!req.user || !req.user._id) {
-    //     return res.status(401).json({ message: 'User not authenticated' });
-    // }
+    
     if(!req.body.firstname) {
         return res.status(400).json({ message:'First name is required to create a contractor' })
     }
@@ -59,9 +56,13 @@ router.put('/contractors', async (req, res) => {
         return res.status(400).json({ message:'Zip code is required to create a contractor' })
     }
 
+    console.log(req.body)
+    console.log("Pro information received!")
+    console.log(req.user)
+    console.log(req.headers)
+
     try {
         const contractor = await Contractor.create({
-            // user: req.user._id,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             company: req.body.company,
@@ -71,6 +72,7 @@ router.put('/contractors', async (req, res) => {
             email: req.body.email,
             country: req.body.country,
             zip: req.body.zip,
+            user: new mongoose.Types.ObjectId(req.user.id),
             createdDate: req.body.createdDate
         })
         return res.status(201).json(contractor);
