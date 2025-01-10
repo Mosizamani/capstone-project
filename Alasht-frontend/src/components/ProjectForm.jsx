@@ -70,7 +70,7 @@ const handleSubmit = async (e) => {
 
 async function fetchProject(data) {
     try {
-        const response = await fetch('http://localhost:4001/projects', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL_F}/projects`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -78,13 +78,13 @@ async function fetchProject(data) {
         })
 
         if (response.ok) {
-            alert("Form submitted successfully!");
+            alert("Form submitted successfully!")
         } else {
-            alert("Failed to submit form.");
+            alert("Failed to submit form.")
         }
     } catch (error) {
-        console.error("Submission error:", error);
-        alert("An error occurred during submission.");
+        console.error("Submission error:", error)
+        alert("An error occurred during submission.")
     }
 }
 
@@ -92,7 +92,7 @@ const navigate = useNavigate()
 
 const handleBack = async () => {
     try {
-        const response = await fetch('http://localhost:4001/client-complete-profile', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL_F}/client-complete-profile`, {
             method: 'POST',
             credentials: 'include',
         })

@@ -32,7 +32,7 @@ const serviceOptions = [
 
 const handleServiceSelect = (event) => {
     const { value } = event.target;
-    onServiceChange(service.id, value);
+    onServiceChange(service.id, value)
 }
 
 return (

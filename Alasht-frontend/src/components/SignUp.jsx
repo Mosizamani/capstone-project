@@ -14,7 +14,7 @@ const Signup = () => {
 
     const signupUser = async (username, password, userType) => {
         try {
-            const response = await fetch('http://localhost:4001/auth/register', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL_F}/auth/register`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

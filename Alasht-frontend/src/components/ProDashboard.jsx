@@ -32,7 +32,7 @@ const handleLogout = async () => {
 
     try {
     console.log("Attempting logout...")
-    const response = await fetch('http://localhost:4001/logout', { 
+    const response = await fetch(`${import.meta.env.VITE_API_URL_F}/logout`, { 
         method: "POST", 
         credentials: "include",
     })
@@ -50,7 +50,7 @@ const handleLogout = async () => {
 const handleEditProfile = async () => {
 
     try {
-    const response = await fetch('http://localhost:4001/pro-complete-profile', { 
+    const response = await fetch(`${import.meta.env.VITE_API_URL_F}/pro-complete-profile`, { 
         method: "POST", 
         credentials: "include",
     })
