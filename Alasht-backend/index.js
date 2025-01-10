@@ -12,6 +12,8 @@ const app = express()
 const port = process.env.PORT || 4001
 const sessionSecret = process.env.SESSION_SECRET
 const mongodbUrl = process.env.DATA_BASE_URL
+const isProduction = process.env.NODE_ENV === 'production';
+
 
 // const loggedIn = (req, res, next) => {
 //     if (req.user) {
@@ -25,8 +27,9 @@ const proRouter = require('./routers/proRouter')
 const clientRouter = require('./routers/clientRouter')
 const authRouter = require('./routers/authRouter')
 
+// Middleware
 app.use(express.json())
-app.use(express.static('./Alasht-frontend/dist'))
+app.use(express.static('./Alasht-frontend'))
 app.use(cors({
     origin: process.env.FRONT_END_URL,
     credentials: true,
@@ -43,7 +46,7 @@ app.use(session({
     cookie: { 
         // secure: false,
         httpOnly: true,  // Helps prevent XSS attacks
-        secure: process.env.NODE_ENV === 'production',  //... Set to `true` if using HTTPS
+        secure: isProduction,  //... Set to `true` if using HTTPS
         maxAge: 1000 * 60 * 60 * 24  //... Session cookie expires in 24 hours
     }
 }))
@@ -52,11 +55,20 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+// Routers
 app.use(proRouter)
-
 app.use(clientRouter)
-
 app.use(authRouter)
+
+// Global error Handling
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).json({ error: 'Something went wrong!' })
+})
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`)
+    next()
+})
 
 //... Function to start the application
 const start = async () => {
