@@ -12,7 +12,7 @@ const app = express()
 const port = process.env.PORT || 4001
 const sessionSecret = process.env.SESSION_SECRET
 const mongodbUrl = process.env.DATA_BASE_URL
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production'
 
 
 // const loggedIn = (req, res, next) => {
@@ -47,6 +47,7 @@ app.use(session({
         // secure: false,
         httpOnly: true,  // Helps prevent XSS attacks
         secure: isProduction,  //... Set to `true` if using HTTPS
+        sameSite: 'strict', // Prevent CSRF attacks
         maxAge: 1000 * 60 * 60 * 24  //... Session cookie expires in 24 hours
     }
 }))
@@ -55,19 +56,25 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`)
+    next()
+})
+
 // Routers
 app.use(proRouter)
 app.use(clientRouter)
 app.use(authRouter)
 
+// Health check route
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'Server is running' })
+})
+
 // Global error Handling
 app.use((err, req, res, next) => {
     console.error(err.stack)
     res.status(500).json({ error: 'Something went wrong!' })
-})
-app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`)
-    next()
 })
 
 //... Function to start the application
