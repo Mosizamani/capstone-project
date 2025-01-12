@@ -5,6 +5,10 @@ const cors = require('cors')
 const session = require('express-session')
 const passport = require('passport')
 const MongoStore = require('connect-mongo')
+const morgan = require('morgan')
+const helmet = require('helmet')
+const mongoSanitize = require('express-mongo-sanitize');
+const xssClean = require('xss-clean')
 
 require('dotenv').config()
 
@@ -29,8 +33,9 @@ const clientRouter = require('./routers/clientRouter')
 const authRouter = require('./routers/authRouter')
 
 // Middleware
+app.use(morgan('combined'))
+app.use(helmet())
 app.use(express.json())
-app.use(express.static('./Alasht-frontend'))
 app.use(cors({
     origin: frontEndUrl,
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
@@ -38,17 +43,20 @@ app.use(cors({
     credentials: true,
 }))
 
+app.use(mongoSanitize())
+app.use(xssClean())
+
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", "*")
     res.setHeader(
         "Access-Control-Allow-Methods",
         "OPTIONS, GET, POST, PUT, PATCH, DELETE"
     )
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
     if (req.method === "OPTIONS") {
-        return res.sendStatus(200);
+        return res.sendStatus(200)
     }
-    next();
+    next()
 })
 
 app.use(session({
@@ -63,7 +71,7 @@ app.use(session({
         // secure: false,
         httpOnly: true,  // Helps prevent XSS attacks
         secure: isProduction,  //... Set to `true` if using HTTPS
-        sameSite: 'strict', // Prevent CSRF attacks
+        sameSite: isProduction ? 'strict' : 'lax', // Prevent CSRF attacks
         maxAge: 1000 * 60 * 60 * 24  //... Session cookie expires in 24 hours
     }
 }))
@@ -76,18 +84,6 @@ app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`)
     next()
 })
-
-app.use((req, res, next) => {
-    if (req.method === 'OPTIONS') {
-        res.setHeader('Access-Control-Allow-Origin', frontEndUrl);
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        res.setHeader('Access-Control-Allow-Credentials', 'true');
-        return res.sendStatus(204); // Respond with no content for preflight
-    }
-    next();
-});
-
 
 // Routers
 app.use(proRouter)
