@@ -5,7 +5,6 @@ const cors = require('cors')
 const session = require('express-session')
 const passport = require('passport')
 const MongoStore = require('connect-mongo')
-const morgan = require('morgan')
 const helmet = require('helmet')
 const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean')
@@ -33,7 +32,6 @@ const clientRouter = require('./routers/clientRouter')
 const authRouter = require('./routers/authRouter')
 
 // Middleware
-app.use(morgan('combined'))
 app.use(helmet())
 app.use(express.json())
 app.use(cors({
