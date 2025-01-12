@@ -13,6 +13,7 @@ const port = process.env.PORT || 4001
 const sessionSecret = process.env.SESSION_SECRET
 const mongodbUrl = process.env.DATA_BASE_URL
 const isProduction = process.env.NODE_ENV === 'production'
+const frontEndUrl = process.env.FRONT_END_URL
 
 
 // const loggedIn = (req, res, next) => {
@@ -31,7 +32,9 @@ const authRouter = require('./routers/authRouter')
 app.use(express.json())
 app.use(express.static('./Alasht-frontend'))
 app.use(cors({
-    origin: process.env.FRONT_END_URL,
+    origin: frontEndUrl,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
     credentials: true,
 }))
 
