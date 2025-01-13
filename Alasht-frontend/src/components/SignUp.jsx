@@ -31,6 +31,7 @@ const Signup = () => {
                 setUsername("")
                 setPassword("")
 
+                console.log('Request Body:', req.body)
                 
 
             } else {

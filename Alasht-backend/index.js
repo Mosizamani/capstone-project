@@ -45,7 +45,7 @@ app.use(mongoSanitize())
 app.use(xssClean())
 
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Origin", "https://alasht-frontend.onrender.com")
     res.setHeader(
         "Access-Control-Allow-Methods",
         "OPTIONS, GET, POST, PUT, PATCH, DELETE"
