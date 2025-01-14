@@ -25,5 +25,9 @@
     "passport-local": "^1.0.0",
     "prop-types": "^15.8.1",
     "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }
