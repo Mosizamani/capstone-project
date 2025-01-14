@@ -2,7 +2,7 @@
 export default function Home() {
 return (
     <div>
-    <h1>Alasht</h1>
+    <h1>Alasht®</h1>
     <p>Alasht Application for Connecting Contractors, Subcontractors, Tradespeople, and Clients. 
         This app is a comprehensive platform designed to streamline the process of finding, 
         hiring, and collaborating with contractors, subcontractors, tradespeople, and clients on a variety of projects. 
