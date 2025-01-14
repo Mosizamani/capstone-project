@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Services from './components/Services'
 import Products from './components/Products'
+import WorkShops from './components/WorkShops'
 import ProfessionalSignup from './components/ProfessionalSignup'
 import Login from './components/Login'
 import Signup from './components/SignUp'
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/services" element={<Services />} ></Route>
         <Route path="/products" element={<Products />} ></Route>
+        <Route path="/workshops" element={<WorkShops />} ></Route>
         <Route path="/professionalsignup" element={<ProfessionalSignup />} ></Route>
         <Route path="/login" element={<Login />} ></Route>
         <Route path="/signup" element={<Signup />} ></Route>
